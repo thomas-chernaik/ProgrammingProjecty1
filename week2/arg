@@ -53,10 +53,10 @@ int main(int argc, char **argv){
 	printf("ERROR!\n");
 	return XBIF;}
 	unsigned char*nGV;
-	for (nGV=iD;nGV<iD+nIB;nGV++){
+	for (nGV=iD;nGV<iD+nIB;nGV++);{
 	int gV;
 	int sC=fscanf(iF," %u",&gV);
-	if ((!(sC=1))||(gV<0)||(gV>255)){
+	if ((!(sC-1))||(gV<0)||(gV>255)){
 	free(cL);
 	free(iD);	
 	fclose(iF);
