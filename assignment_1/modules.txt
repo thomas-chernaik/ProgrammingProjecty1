@@ -1,0 +1,17 @@
+proposed Modules:
+pgmRead - a module which will read in a pgm file to an array
+pgmWrite - a module which will write an array to a pgm file 
+pgmBinWrite - a module which will write an array to a binary pgm file
+pgmCompare - a module which will take two pgm files as arrays and compare them
+pgmReadBinary - a module which will read in a binary pgm file to an array
+pgma2b - a module which will convert an ascii pgm file to binary (uses pgmread and pgmbinWrite)
+pgmb2a - a module which will convert a binary pgm file to ascii (uses pgmReadBinary and pgmWrite)
+pgmReduceSize - a module which will take a pgm array and a factor and output a pgm array reduced by the factor
+pgmSubImage - a module which will take a pgm array and a start and end column and a start and end row and output that subimage for those rows and columns
+pgmInsert - a module which will take an output image, an input image, and a row and column in the output image to insert the input image.
+pgmEmpty - a module which will take a width and length and output a pgm array of width and length specified.
+
+all will use pgmRead, pgmWrite, pgmBinWrite, and pgmReadBinary.
+pgmReduce will use pgmReduceSize.
+pgmTile will use pgmSubImage.
+pgmAssemble will use pgmInsert and pgmEmpty.
