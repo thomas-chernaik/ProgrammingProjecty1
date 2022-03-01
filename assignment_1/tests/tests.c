@@ -38,6 +38,7 @@ void testHeaders(){
 		failed++;
 	}
 	
+	printResults("Headers", passed, failed);
 }
 	
 	
