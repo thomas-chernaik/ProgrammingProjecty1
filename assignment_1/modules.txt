@@ -1,4 +1,5 @@
 proposed Modules:
+pgmHeaders - a module which will read in the headers from a pgm file
 pgmRead - a module which will read in a pgm file to an array
 pgmWrite - a module which will write an array to a pgm file 
 pgmBinWrite - a module which will write an array to a binary pgm file
@@ -11,7 +12,7 @@ pgmSubImage - a module which will take a pgm array and a start and end column an
 pgmInsert - a module which will take an output image, an input image, and a row and column in the output image to insert the input image.
 pgmEmpty - a module which will take a width and length and output a pgm array of width and length specified.
 
-all will use pgmRead, pgmWrite, pgmBinWrite, and pgmReadBinary.
+all will use pgmHeaders, pgmRead, pgmWrite, pgmBinWrite, and pgmReadBinary.
 pgmReduce will use pgmReduceSize.
 pgmTile will use pgmSubImage.
 pgmAssemble will use pgmInsert and pgmEmpty.
