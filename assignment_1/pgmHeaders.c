@@ -1,6 +1,5 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "pgmHeaders.h"
 
 int* getHeaders(char* filename){
 	FILE *file;

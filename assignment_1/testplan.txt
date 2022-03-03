@@ -1,4 +1,0 @@
-In order to test my code, I will write unit tests for all my modules.
-I will have unit tests that test that the module will have the desired output for valid data, boundary data, absent data, and invalid data.
-I will test that the invalid and absent data returns the correct responses for the errors they cause, and I will test that the valid and boundary data return a valid output.
-I will manually test my makefile.

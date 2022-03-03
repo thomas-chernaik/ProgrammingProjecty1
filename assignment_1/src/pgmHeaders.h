@@ -1,1 +1,0 @@
-int* getHeaders(char* filename);
