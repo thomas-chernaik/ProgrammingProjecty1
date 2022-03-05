@@ -30,7 +30,9 @@ int* getHeaders(char* filename){
 	returnValues[1] = 2;
 	if(returnValues[0] < 0 || returnValues[1] < 0){
 		//exit -3 if dimension error
+		fclose(file);
 		exit(-3);
 	}
+	fclose(file);
 	return returnValues;
 }

@@ -1,4 +1,7 @@
-float* readFile(char* filename, width, height, maxGrey){
+#include <stdio.h>
+#include <stdlib.h>
+
+float* readFile(char* filename, int width, int height, int maxGrey){
 	FILE *file;
 	float* fileToReturn = (float*) malloc(width*height*sizeof(int));
 	int* listOfInts = (int*) malloc(width*height*sizeof(int));
@@ -13,5 +16,6 @@ float* readFile(char* filename, width, height, maxGrey){
 		fscanf(file, " %d ", listOfInts[i]);
 		fileToReturn[i] = listOfInts[i]/maxGrey;
 	}
+	fclose(file);
 	return fileToReturn;
 }
