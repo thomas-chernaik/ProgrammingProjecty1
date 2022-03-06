@@ -11,10 +11,15 @@ float* readFile(char* filename, int width, int height, int maxGrey){
 		exit(-1);
 	}
 	fgetc(file);
-	fscanf(file, " %s %d %d %d ", NULL, NULL, NULL, NULL);
+	fgetc(file);
+	int* i = malloc(sizeof(int));
+	int* j = malloc(sizeof(int));
+	int* k = malloc(sizeof(int));
+	
+	fscanf(file, " %d %d %d", i, j, k);
 	for(int i=0; i<width*height; i++){
-		fscanf(file, " %d ", listOfInts[i]);
-		fileToReturn[i] = listOfInts[i]/maxGrey;
+		fscanf(file, "%d", &listOfInts[i]);
+		fileToReturn[i] = (float) listOfInts[i] / (float) maxGrey;
 	}
 	fclose(file);
 	return fileToReturn;
