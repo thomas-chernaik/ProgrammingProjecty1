@@ -13,7 +13,9 @@ int main(int argc, char **argv){
 	//headers[0] is width, [1] is height, [2] is maxGrey
 	headers = getHeaders(argv[1]);
 	//TODO: check if binary or ascii
+	//if ascii read and write the ascii file.
 	float* file = readFile(argv[1], headers[0], headers[1], headers[2]);
 	writeFile(argv[2], file, headers[0], headers[1], headers[2]);
+	free(file);
 	//TODO: binary implementation
 }
