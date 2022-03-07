@@ -29,8 +29,6 @@ int* getHeaders(char* filename){
 	int num=0;
 	//read in the width height and maxgrey values
 	fscanf(file, " %d %d %d", &returnValues[0], &returnValues[1], &returnValues[2]);
-	returnValues[0] = 2;
-	returnValues[1] = 2;
 	//verify the width and height are valid
 	if(returnValues[0] < 0 || returnValues[1] < 0){
 		//exit -3 if dimension error

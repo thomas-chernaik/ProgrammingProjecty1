@@ -1,1 +1,1 @@
-int compare(char* file1, char* file2);
+int compare(float* file1, float* file2);

@@ -7,7 +7,7 @@
 #include "pgmBinWrite.h"
 int main(int argc, char **argv){
 	if(argc != 3){
-		printf("error: input valid arguments.");
+		printf("ERROR: Bad File Name (fname)");
 		exit(-5);
 	}
 	int* headers;
@@ -21,6 +21,7 @@ int main(int argc, char **argv){
 		free(file);
 	}
 	else{
+		//else its binary so read and write the binary file
 		float* file = readFileBin(argv[1], headers[0], headers[1], headers[2]);
 		writeBin(argv[2], file, headers[0], headers[1], headers[2]);
 		free(file);
