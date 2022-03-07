@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <ctype.h>
 #include "pgmReadBinary.h"
+
 
 float* readFileBin(char* filename, int width, int height, int maxGrey){
 	int numBytesPerValue;//this is 1 if maxGrey is less than 256 otherwise is 2
@@ -10,20 +12,22 @@ float* readFileBin(char* filename, int width, int height, int maxGrey){
 	else{
 		numBytesPerValue = 1;
 	}
+	FILE* file;
+	file = fopen(filename, "rb");
 	//we want to read through the headers until we reach the raster.
 	//in order to do this we need to read through some characters followed by whitespace 4 times.
 	//read through magic num
-	readUntilWhitespace();
-	readThroughWhitespace();
+	readUntilWhitespace(file);
+	readThroughWhitespace(file);
 	//read through width
-	readUntilWhitespace();
-	readThroughWhitespace();
+	readUntilWhitespace(file);
+	readThroughWhitespace(file);
 	//read through height
-	readUntilWhitespace();
-	readThroughWhitespace();
+	readUntilWhitespace(file);
+	readThroughWhitespace(file);
 	//read though maxGrey
-	readUntilWhitespace();
-	readThroughWhitespace();
+	readUntilWhitespace(file);
+	readThroughWhitespace(file);
 	//we are now at the raster values and need to read them in.
 	float* fileToReturn = (float*) malloc(width*height*sizeof(int));
 	int* listOfInts = (int*) malloc(width*height*sizeof(int));
@@ -31,12 +35,12 @@ float* readFileBin(char* filename, int width, int height, int maxGrey){
 	char* chr2 = malloc(sizeof(char));
 	*chr1 = 0;
 	for(int i=0; i<width*height; i++){
-		if(numBytesPerValue=1){
-			fread(&chr1, sizeof(char), 1, file);
+		if(numBytesPerValue==2){
+			fread(chr1, sizeof(char), 1, file);
 		}
-		fread(&chr2, sizeof(char), 1, file);
+		fread(chr2, sizeof(char), 1, file);
 		//convert the bytes to an int
-		listOfInts[i] = bytesToInt(chr1, chr2);
+		listOfInts[i] = bytesToInt(*chr1, *chr2);
 		//normalise and store in variable
 		fileToReturn[i] = (float) listOfInts[i] / (float) maxGrey;
 	}
@@ -52,8 +56,8 @@ void readUntilWhitespace(FILE *file){
 	//read until isspace is true then back up one
 	char* chr = malloc(sizeof(char));
 	do{
-		fread(&chr, sizeof(char), 1, file);
-	} while(!isspace(chr));
+		fread(chr, sizeof(char), 1, file);
+	} while(!isspace(*chr));
 	free(chr);
 	//back up one
 	fseek(file, -1, SEEK_CUR);
@@ -63,8 +67,8 @@ void readThroughWhitespace(FILE *file){
 	//read until isspace is not true then back up one
 	char* chr = malloc(sizeof(char));
 	do{
-		fread(&chr, sizeof(char), 1, file);
-	} while(isspace(chr));
+		fread(chr, sizeof(char), 1, file);
+	} while(isspace(*chr));
 	free(chr);
 	//back up one
 	fseek(file, -1, SEEK_CUR);

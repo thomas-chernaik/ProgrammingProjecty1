@@ -2,7 +2,7 @@
 CC= gcc
 CFLAGS = -g -std=c99
 
-SRC= pgmEcho.c pgmHeaders.c pgmRead.c pgmWrite.c
+SRC= pgmEcho.c pgmHeaders.c pgmRead.c pgmWrite.c pgmBinWrite.c pgmReadBinary.c
 OBJ = $(SRC:.c=.o)
 
 .c.o:
@@ -17,7 +17,13 @@ pgmRead.o: pgmRead.c pgmRead.h
 	$(CC) $(CFLAGS) -c pgmRead.c pgmRead.h
 pgmWrite.o: pgmWrite.c pgmWrite.h
 	$(CC) $(CFLAGS) -c pgmWrite.c pgmWrite.h
-pgmEcho.o: pgmEcho.c pgmEcho.h pgmHeaders.o pgmRead.o pgmWrite.o
-	$(CC) $(CFLAGS) -c pgmEcho.c pgmEcho.h pgmHeaders.o pgmRead.o pgmWrite.o
+pgmReadBinary.o: pgmReadBinary.c pgmReadBinary.h
+	$(CC) $(CFLAGS) -c pgmReadBinary.c pgmReadBinary.h
+pgmBinWrite.o: pgmBinWrite.c pgmBinWrite.h
+	$(CC) $(CFLAGS) -c pgmBinWrite.c pgmBinWrite.h
+
+pgmEcho.o: pgmEcho.c pgmEcho.h pgmHeaders.o pgmRead.o pgmWrite.o pgmReadBinary.o pgmBinWrite.o
+	$(CC) $(CFLAGS) -c pgmEcho.c pgmEcho.h pgmHeaders.o pgmRead.o pgmWrite.o pgmReadBinary.o pgmBinWrite.o
+
 clean:
 	rm -f *.o
