@@ -55,6 +55,12 @@ float* readFileBin(char* filename, int width, int height, int maxGrey){
 void readUntilWhitespace(FILE *file){
 	//read until isspace is true then back up one
 	char* chr = malloc(sizeof(char));
+	//check if its a comment
+	if(*chr == '#'){
+		readThroughWhitespace(file);
+		readUntilWhitespace(file);
+	}
+
 	do{
 		fread(chr, sizeof(char), 1, file);
 	} while(!isspace(*chr));
