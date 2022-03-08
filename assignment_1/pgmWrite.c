@@ -6,12 +6,24 @@ void writeFile(char* filename, float* fileToWrite, int width, int height, int ma
 	//open the file to write
 	FILE *file;
 	file = fopen(filename, "w+");
+	if(!file){
+		printf("ERROR: Bad File Name (%s)", filename);
+		exit(2);
+	}
 	//read headers into a string and then write string to file
 	char* headers = malloc(sizeof(char)*9);
+	if(!headers){
+		printf("ERROR: Miscellaneous (malloc failed)");
+		exit(100);
+	}
 	sprintf(headers, "P2\n%d %d\n%d\n", width, height, maxGrey);
 	fputs(headers, file);
 	free(headers);
 	char* stringToPut = malloc(sizeof(char) * 5);
+	if(!stringToPut){
+                printf("ERROR: Miscellaneous (malloc failed)");
+                exit(100);
+	}
 	int numToPut;
 	int lineLength = 0;
 	for(int i=0; i<height; i++){

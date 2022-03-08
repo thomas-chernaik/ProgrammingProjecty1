@@ -6,9 +6,13 @@
 #include "pgmReadBinary.h"
 #include "pgmBinWrite.h"
 int main(int argc, char **argv){
+	if(argc == 1){
+		printf("Usage: ./pgmEcho inputImage.pgm outputImage.pgm");
+		return 0;
+	}
 	if(argc != 3){
-		printf("ERROR: Bad File Name (fname)");
-		exit(-5);
+		perror("ERROR: Bad Argument Count");
+		return 1;
 	}
 	int* headers;
 	//headers[0] is width, [1] is height, [2] is maxGrey [3] is magic num
@@ -25,5 +29,9 @@ int main(int argc, char **argv){
 		float* file = readFileBin(argv[1], headers[0], headers[1], headers[2]);
 		writeBin(argv[2], file, headers[0], headers[1], headers[2]);
 		free(file);
-	}	
+	
+	}
+	free(headers);
+	printf("ECHOED");
+	return 0;	
 }

@@ -4,3 +4,5 @@
 diff testfile1.pgm testfileout1.pgm
 ./pgmEcho testfile2.pgm testfileout2.pgm
 diff testfile2.pgm testfileout2.pgm
+./pgmComp testfile1.pgm testfileout1.pgm
+./pgmComp testfile2.pgm testfileout2.pgm

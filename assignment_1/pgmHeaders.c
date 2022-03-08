@@ -7,8 +7,8 @@ int* getHeaders(char* filename){
 	int* returnValues = (int*) malloc(5 * sizeof(int));
 	file = fopen(filename, "r");
 	if(file == NULL){
-		//exit -1 if file error
-		exit(-1);
+		printf("ERROR: Bad File Name (%s)", filename);
+		exit(2);
 	}
 	//clear the P from the magic number
 	fgetc(file);
@@ -23,9 +23,9 @@ int* getHeaders(char* filename){
 		returnValues[3] = 5;
 	}
 	else{
-		//exit -2 if magicNum error
 		fclose(file);
-		exit(-2);
+		printf("ERROR: Bad Magic Number (%s)", filename);
+		exit(3);
 	
 	}
 	int num=0;
@@ -38,9 +38,15 @@ int* getHeaders(char* filename){
 	skipCommenth(file);
 	//verify the width and height are valid
 	if(returnValues[0] < 0 || returnValues[1] < 0){
-		//exit -3 if dimension error
 		fclose(file);
-		exit(-3);
+		printf("ERROR: Bad Dimensions (%s)", filename);
+		exit(5);
+	}
+	//verify that the maxgrey value is valid
+	if(returnValues[2] < 0 || returnValues[2] >= 65536){
+		fclose(file);
+		printf("ERROR: Bad Max Gray Value (%s)", filename);
+		exit(6);
 	}
 	//close the file.
 	fclose(file);

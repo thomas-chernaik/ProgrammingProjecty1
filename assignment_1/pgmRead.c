@@ -6,10 +6,14 @@ float* readFile(char* filename, int width, int height, int maxGrey){
 	FILE *file;
 	float* fileToReturn = (float*) malloc(width*height*sizeof(int));
 	int* listOfInts = (int*) malloc(width*height*sizeof(int));
+	if(!fileToReturn || !listOfInts){//check malloc succeeded
+		printf("ERROR: Image Malloc Failed");
+		exit(7);
+	}
 	file = fopen(filename, "r");
 	if(file == NULL){
-		//exit -1 if file error
-		exit(-1);
+		printf("ERROR: Bad File Name (%s)", filename);
+		exit(2);
 	}
 	//read out the magic number
 	skipComment(file);

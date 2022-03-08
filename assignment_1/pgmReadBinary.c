@@ -14,6 +14,11 @@ float* readFileBin(char* filename, int width, int height, int maxGrey){
 	}
 	FILE* file;
 	file = fopen(filename, "rb");
+	//check file opened
+	if(!file){
+		printf("ERROR: Bad File Name (%s)", filename);
+		exit(2);
+	}
 	//we want to read through the headers until we reach the raster.
 	//in order to do this we need to read through some characters followed by whitespace 4 times.
 	//read through magic num
@@ -33,6 +38,10 @@ float* readFileBin(char* filename, int width, int height, int maxGrey){
 	int* listOfInts = (int*) malloc(width*height*sizeof(int));
 	char* chr1 = malloc(sizeof(char));
 	char* chr2 = malloc(sizeof(char));
+	if(!fileToReturn || !listOfInts || !chr1 || !chr2){
+		printf("ERROR: Image Malloc Failed");
+		exit(7);
+	}
 	*chr1 = 0;
 	for(int i=0; i<width*height; i++){
 		if(numBytesPerValue==2){

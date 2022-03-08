@@ -7,6 +7,10 @@ void writeBin(char* filename, float* fileToWrite, int width, int height, int max
 	//open the file to write
 	FILE *file;
 	file = fopen(filename, "wb+");
+	if(!file){
+		printf("ERROR: Bad File Name (%s)", filename);
+		exit(2);
+	}
 	//read headers into a string and then write string to file
 	char* headers = malloc(sizeof(char)*9);
 	sprintf(headers, "P5\n%d %d\n%d\n", width, height, maxGrey);
