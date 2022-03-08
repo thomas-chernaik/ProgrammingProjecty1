@@ -4,7 +4,7 @@
 float* readFile(char* filename, int width, int height, int maxGrey){
 	//initialise and malloc our needed variables
 	FILE *file;
-	float* fileToReturn = (float*) malloc(width*height*sizeof(int));
+	float* fileToReturn = (float*) malloc(width*height*sizeof(float));
 	int* listOfInts = (int*) malloc(width*height*sizeof(int));
 	if(!fileToReturn || !listOfInts){//check malloc succeeded
 		printf("ERROR: Image Malloc Failed");

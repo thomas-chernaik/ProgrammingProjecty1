@@ -34,7 +34,7 @@ float* readFileBin(char* filename, int width, int height, int maxGrey){
 	readUntilWhitespace(file);
 	readThroughWhitespace(file);
 	//we are now at the raster values and need to read them in.
-	float* fileToReturn = (float*) malloc(width*height*sizeof(int));
+	float* fileToReturn = (float*) malloc(width*height*sizeof(float));
 	int* listOfInts = (int*) malloc(width*height*sizeof(int));
 	char* chr1 = malloc(sizeof(char));
 	char* chr2 = malloc(sizeof(char));

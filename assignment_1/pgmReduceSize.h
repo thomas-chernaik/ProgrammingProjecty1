@@ -1,1 +1,1 @@
-char* reduceSize(char* file, int factor);
+float* reduceSize(float* file, int oldwidth, int oldheight, int factor);

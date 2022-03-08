@@ -5,7 +5,7 @@
 #include "pgmBinWrite.h"
 int main(int argc, char **argv){
         if(argc == 1){
-                printf("Usage: ./pgmEcho inputImage.pgm outputImage.pgm");
+                printf("Usage: ./pgma2b inputImage.pgm outputImage.pgm");
                 return 0;
         }
         if(argc != 3){
