@@ -6,3 +6,5 @@ diff testfile1.pgm testfileout1.pgm
 diff testfile2.pgm testfileout2.pgm
 ./pgmComp testfile1.pgm testfileout1.pgm
 ./pgmComp testfile2.pgm testfileout2.pgm
+./pgma2b testfile1.pgm testfile1b.pgm
+./pgmComp testfile1.pgm testfile1b.pgm

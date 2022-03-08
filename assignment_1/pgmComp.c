@@ -35,10 +35,10 @@ int main(int argc, char **argv){
 		file1 = readFileBin(argv[1], headers1[0], headers1[1], headers1[2]);
 	}
 	if(headers2[3] == 2){
-                file2 = readFile(argv[1], headers2[0], headers2[1], headers2[2]);
+                file2 = readFile(argv[2], headers2[0], headers2[1], headers2[2]);
         }
         else{
-                file2 = readFileBin(argv[1], headers2[0], headers2[1], headers2[2]);
+                file2 = readFileBin(argv[2], headers2[0], headers2[1], headers2[2]);
         }
 	result = compareContents(file1, file2, headers2[0] * headers2[1]);
 	free(file1);

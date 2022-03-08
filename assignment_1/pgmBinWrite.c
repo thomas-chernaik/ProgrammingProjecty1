@@ -22,8 +22,8 @@ void writeBin(char* filename, float* fileToWrite, int width, int height, int max
 		for(int j=0; j<width; j++){
 			//we need to do the +0.5f and round down to avoid any floating point errors
 			numToPut = (int) (fileToWrite[i*width+j] * maxGrey) + 0.5f;
-			bytes[0] = numToPut/255;
-			bytes[1] = numToPut%255;
+			bytes[0] = numToPut/256;
+			bytes[1] = numToPut%256;
 			if(maxGrey > 255){
 				fwrite(&bytes[0], sizeof(char), 1, file);
 			}
