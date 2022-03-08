@@ -6,7 +6,7 @@
 
 float* readFileBin(char* filename, int width, int height, int maxGrey){
 	int numBytesPerValue;//this is 1 if maxGrey is less than 256 otherwise is 2
-	if (maxGrey > 256){
+	if (maxGrey >= 256){
 		numBytesPerValue = 2;
 	}
 	else{
