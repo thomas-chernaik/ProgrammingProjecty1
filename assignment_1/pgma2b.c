@@ -5,11 +5,11 @@
 #include "pgmBinWrite.h"
 int main(int argc, char **argv){
         if(argc == 1){
-                printf("Usage: ./pgma2b inputImage.pgm outputImage.pgm");
+                printf("Usage: ./pgma2b inputImage.pgm outputImage.pgm\n");
                 return 0;
         }
         if(argc != 3){
-                printf("ERROR: Bad Argument Count");
+                printf("ERROR: Bad Argument Count\n");
                 return 1;
         }
         int* headers;
@@ -17,13 +17,13 @@ int main(int argc, char **argv){
         headers = getHeaders(argv[1]);
 	//check is ascii
 	if(headers[3] != 2){
-		printf("ERROR: Bad File Name (%s)", argv[1]);
+		printf("ERROR: Bad File Name (%s)\n", argv[1]);
 		return 2;
 	}
         float* file = readFile(argv[1], headers[0], headers[1], headers[2]);
         writeBin(argv[2], file, headers[0], headers[1], headers[2]);
 	free(file);
 	free(headers);
-	printf("CONVERTED");
+	printf("CONVERTED\n");
 	return 0;
 }

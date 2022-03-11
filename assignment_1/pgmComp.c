@@ -6,11 +6,11 @@
 
 int main(int argc, char **argv){
 	if(argc == 1){
-                printf("Usage: ./pgmComp inputImage.pgm inputImage.pgm");
+                printf("Usage: ./pgmComp inputImage.pgm inputImage.pgm\n");
                 return 0;
         }
         if(argc != 3){
-                perror("ERROR: Bad Argument Count");
+                printf("ERROR: Bad Argument Count\n");
                 return 1;
         }
 	int* headers1;
@@ -23,7 +23,7 @@ int main(int argc, char **argv){
 	if(!result){
 		free(headers1);
 		free(headers2);
-		printf("DIFFERENT");
+		printf("DIFFERENT\n");
 		return 0;
 	}
 	float* file1;
@@ -46,9 +46,9 @@ int main(int argc, char **argv){
 	free(headers1);
 	free(headers2);
 	if(!result){
-		printf("DIFFERENT");
+		printf("DIFFERENT\n");
 		return 0;
 	}
-	printf("IDENTICAL");
+	printf("IDENTICAL\n");
 	return 0;
 }

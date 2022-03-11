@@ -19,3 +19,8 @@ diff testfile2.pgm testfileout2.pgm
 #we do the same as pgma2b but in reverse for testing this.
 ./pgmb2a testfile2.pgm testfile2a.pgm
 ./pgmComp testfile2.pgm testfile2a.pgm
+#now we test pgmReduce
+./pgmReduce testfile1.pgm 2 testfilereduceout.pgm
+./pgmComp testfilereduce.pgm testfilereduceout.pgm
+./pgmReduce testfile1b.pgm 2 testfilereduceoutb.pgm
+./pgmComp testfilereduceb.pgm testfilereduceoutb.pgm

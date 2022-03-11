@@ -10,11 +10,11 @@
 
 int main(int argc, char** argv){
 	if(argc == 1){
-		printf("Usage: ./pgmReduce inputImage.pgm reduction_factor outputImage.pgm");
+		printf("Usage: ./pgmReduce inputImage.pgm reduction_factor outputImage.pgm\n");
 		return 0;
 	}
 	if(argc != 4){
-		printf("ERROR: Bad Argument Count");
+		printf("ERROR: Bad Argument Count\n");
 		return 1;
 	}
 	int factor = atoi(argv[2]);
@@ -40,6 +40,6 @@ int main(int argc, char** argv){
 	free(headers);
 	free(file);
 	free(reducedFile);
-	printf("REDUCED");
+	printf("REDUCED\n");
 	return 0;
 }

@@ -16,7 +16,7 @@ float* readFileBin(char* filename, int width, int height, int maxGrey){
 	file = fopen(filename, "rb");
 	//check file opened
 	if(!file){
-		printf("ERROR: Bad File Name (%s)", filename);
+		printf("ERROR: Bad File Name (%s)\n", filename);
 		exit(2);
 	}
 	//we want to read through the headers until we reach the raster.
@@ -39,17 +39,42 @@ float* readFileBin(char* filename, int width, int height, int maxGrey){
 	char* chr1 = malloc(sizeof(char));
 	char* chr2 = malloc(sizeof(char));
 	if(!fileToReturn || !listOfInts || !chr1 || !chr2){
-		printf("ERROR: Image Malloc Failed");
+		printf("ERROR: Image Malloc Failedi\n");
 		exit(7);
 	}
 	*chr1 = 0;
 	for(int i=0; i<width*height; i++){
 		if(numBytesPerValue==2){
-			fread(chr1, sizeof(char), 1, file);
+			int scanCount = fread(chr1, sizeof(char), 1, file);
+			if(scanCount != 1){
+                        	free(chr1);
+	                        free(chr2);
+        	                free(listOfInts);
+                	        fclose(file);
+                	        printf("ERROR: Bad Data (%s)", filename);
+                        	exit(8);
+                	}
 		}
-		fread(chr2, sizeof(char), 1, file);
+		int scanCount = fread(chr2, sizeof(char), 1, file);
+		if(scanCount != 1){
+			free(chr1);
+			free(chr2);
+			free(listOfInts);
+			fclose(file);
+			printf("ERROR: Bad Data (%s)", filename);
+                        exit(8);
+                }
+			
 		//convert the bytes to an int
 		listOfInts[i] = bytesToInt(*chr1, *chr2);
+		if((listOfInts[i] < 0) || (listOfInts[i] > 255)){
+			free(chr1);
+                        free(chr2);
+                        free(listOfInts);
+                        fclose(file);
+                        printf("ERROR: Bad Data (%s)", filename);
+                        exit(8);
+		}
 		//normalise and store in variable
 		fileToReturn[i] = (float) listOfInts[i] / (float) maxGrey;
 	}

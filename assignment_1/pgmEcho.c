@@ -7,11 +7,11 @@
 #include "pgmBinWrite.h"
 int main(int argc, char **argv){
 	if(argc == 1){
-		printf("Usage: ./pgmEcho inputImage.pgm outputImage.pgm");
+		printf("Usage: ./pgmEcho inputImage.pgm outputImage.pgm\n");
 		return 0;
 	}
 	if(argc != 3){
-		perror("ERROR: Bad Argument Count");
+		perror("ERROR: Bad Argument Count\n");
 		return 1;
 	}
 	int* headers;
@@ -32,6 +32,6 @@ int main(int argc, char **argv){
 	
 	}
 	free(headers);
-	printf("ECHOED");
+	printf("ECHOED\n");
 	return 0;	
 }

@@ -8,7 +8,7 @@ void writeBin(char* filename, float* fileToWrite, int width, int height, int max
 	FILE *file;
 	file = fopen(filename, "wb+");
 	if(!file){
-		printf("ERROR: Bad File Name (%s)", filename);
+		printf("ERROR: Bad File Name (%s)\n", filename);
 		exit(2);
 	}
 	//read headers into a string and then write string to file
