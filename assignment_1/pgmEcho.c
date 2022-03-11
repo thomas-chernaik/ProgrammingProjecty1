@@ -11,7 +11,7 @@ int main(int argc, char **argv){
 		return 0;
 	}
 	if(argc != 3){
-		perror("ERROR: Bad Argument Count\n");
+		printf("ERROR: Bad Argument Count\n");
 		return 1;
 	}
 	int* headers;

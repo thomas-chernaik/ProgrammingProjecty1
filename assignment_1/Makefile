@@ -3,10 +3,12 @@ CC= gcc
 CFLAGS = -g -std=c99
 
 SRCECHO= pgmHeaders.c pgmRead.c pgmWrite.c pgmBinWrite.c pgmReadBinary.c
+SRCTILE = pgmHeaders.c pgmRead.c pgmWrite.c pgmBinWrite.c pgmReadBinary.c pgmSubImage.c
 SRCREDUCE= pgmHeaders.c pgmRead.c pgmWrite.c pgmBinWrite.c pgmReadBinary.c pgmReduceSize.c
 SRCCOMP = pgmHeaders.c pgmRead.c pgmReadBinary.c pgmCompare.c
 SRCA2B = pgmHeaders.c pgmRead.c pgmBinWrite.c
 SRCB2A = pgmHeaders.c pgmReadBinary.c pgmWrite.c
+OBJTILE = $(SRCTILE:.c=.o)
 OBJB2A = $(SRCB2A:.c=.o)
 OBJA2B = $(SRCA2B:.c=.o)
 OBJREDUCE = $(SRCREDUCE:.c=.o)
@@ -16,7 +18,9 @@ OBJCOMP = $(SRCCOMP:.c=.o)
 .c.o:
 	$(CC) $(CFLAGS) -c -o $@ $<
 
-all: pgmEcho pgmComp pgma2b pgmb2a pgmReduce
+all: pgmEcho pgmComp pgma2b pgmb2a pgmReduce pgmTile
+
+
 
 pgmEcho: pgmEcho.c $(OBJECHO)
 	$(CC) $(CFLAGS) pgmEcho.c $(OBJECHO) -o pgmEcho
@@ -32,7 +36,9 @@ pgmb2a: pgmb2a.c $(OBJB2A)
 
 pgmReduce: pgmReduce.c $(OBJREDUCE)
 	$(CC) $(CFLAGS) pgmReduce.c $(OBJREDUCE) -o pgmReduce
-	
+
+pgmTile: pgmTile.c $(OBJTILE)
+	$(CC) $(CFLAGS) pgmTile.c $(OBJTILE) -o pgmTile	
 
 pgmHeaders.o: pgmHeaders.c pgmHeaders.h
 	$(CC) $(CFLAGS) -c pgmHeaders.c pgmHeaders.h
@@ -48,6 +54,7 @@ pgmCompare.o: pgmCompare.c pgmCompare.h
 	$(CC) $(CFLAGS) -c pgmCompare.c pgmCompare.h
 pgmReduceSize.o: pgmReduceSize.c pgmReduceSize.h
 	$(CC) $(CFLAGS) -c pgmReduceSize.c pgmReduceSize.h
-
+pgmSubImage.o: pgmSubImage.c pgmSubImage.h
+	$(CC) $(CFLAGS) -c pgmSubImage.c pgmSubImage.h
 clean:
 	rm -f *.o *.gch
