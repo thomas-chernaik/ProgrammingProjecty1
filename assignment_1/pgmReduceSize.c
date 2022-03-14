@@ -8,9 +8,9 @@ float* reduceSize(float* file, int oldwidth, int oldheight, int factor){
 	float* newFile = malloc(sizeof(float) * width * height);
 	int pixelIndex = 0;
 	for(int i=0; i<oldwidth; i++){
-		if((i+1)%factor == 0){
+		if((i)%factor == 0){
 			for(int j=0; j<oldheight; j++){
-				if((j+1)%factor == 0){
+				if((j)%factor == 0){
 					newFile[pixelIndex++] = file[j*width+i];
 				}
 			}
