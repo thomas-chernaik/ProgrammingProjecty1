@@ -6,12 +6,6 @@
 
 float* readFileBin(char* filename, int width, int height, int maxGrey){
 	int numBytesPerValue;//this is 1 if maxGrey is less than 256 otherwise is 2
-	if (maxGrey >= 256){
-		numBytesPerValue = 2;
-	}
-	else{
-		numBytesPerValue = 1;
-	}
 	FILE* file;
 	file = fopen(filename, "rb");
 	//check file opened
@@ -35,51 +29,36 @@ float* readFileBin(char* filename, int width, int height, int maxGrey){
 	readThroughWhitespace(file);
 	//we are now at the raster values and need to read them in.
 	float* fileToReturn = (float*) malloc(width*height*sizeof(float));
-	int* listOfInts = (int*) malloc(width*height*sizeof(int));
-	char* chr1 = malloc(sizeof(char));
-	char* chr2 = malloc(sizeof(char));
-	if(!fileToReturn || !listOfInts || !chr1 || !chr2){
+	unsigned int* listOfInts = (unsigned int*) malloc(width*height*sizeof(int));
+	unsigned char* chr1 = malloc(sizeof(char));
+	if(!fileToReturn || !listOfInts || !chr1){
 		printf("ERROR: Image Malloc Failedi\n");
 		exit(7);
 	}
-	*chr1 = 0;
 	for(int i=0; i<width*height; i++){
-		if(numBytesPerValue==2){
-			int scanCount = fread(chr1, sizeof(char), 1, file);
-			if(scanCount != 1){
-                        	free(chr1);
-	                        free(chr2);
-        	                free(listOfInts);
-                	        fclose(file);
-                	        printf("ERROR: Bad Data (%s)", filename);
-                        	exit(8);
-                	}
-		}
-		int scanCount = fread(chr2, sizeof(char), 1, file);
+		int scanCount = fread(chr1, sizeof(char), 1, file);
 		if(scanCount != 1){
 			free(chr1);
-			free(chr2);
 			free(listOfInts);
 			fclose(file);
-			printf("ERROR: Bad Data (%s)", filename);
+			printf("ERROR: Bad Data (%s)\n", filename);
                         exit(8);
                 }
 			
 		//convert the bytes to an int
-		listOfInts[i] = bytesToInt(*chr1, *chr2);
+		listOfInts[i] = bytesToInt(*chr1);
+
 		if((listOfInts[i] < 0) || (listOfInts[i] > 255)){
 			free(chr1);
-                        free(chr2);
                         free(listOfInts);
                         fclose(file);
-                        printf("ERROR: Bad Data (%s)", filename);
+                        printf("ERROR: Bad Data (%s)\n", filename);
                         exit(8);
 		}
 		//normalise and store in variable
 		fileToReturn[i] = (float) listOfInts[i] / (float) maxGrey;
 	}
 	free(chr1);
-	free(chr2);
 	free(listOfInts);
 	fclose(file);
 	return fileToReturn;
@@ -114,6 +93,6 @@ void readThroughWhitespace(FILE *file){
 	fseek(file, -1, SEEK_CUR);
 }
 
-int bytesToInt(char byte1, char byte2){
-	return 255 * (int) byte1 + byte2;
+unsigned int bytesToInt(unsigned char byte1){
+	return (unsigned int) byte1;
 }

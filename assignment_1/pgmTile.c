@@ -36,7 +36,7 @@ int main(int argc, char **argv){
 		return 0;
 	}
 	if(argc != 4){
-		printf("ERROR: Bad Argument Count");
+		printf("ERROR: Bad Argument Count\n");
 		return 1;
 	}
 	char rowcolcmp[] = {'_', '<', 'r', 'o', 'w', '>'};
@@ -83,4 +83,6 @@ int main(int argc, char **argv){
 	}
 	free(headers);
 	free(file);
+	printf("TILED\n");
+	return 0;
 }

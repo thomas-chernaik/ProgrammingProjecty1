@@ -5,9 +5,11 @@ CFLAGS = -g -std=c99
 SRCECHO= pgmHeaders.c pgmRead.c pgmWrite.c pgmBinWrite.c pgmReadBinary.c
 SRCTILE = pgmHeaders.c pgmRead.c pgmWrite.c pgmBinWrite.c pgmReadBinary.c pgmSubImage.c
 SRCREDUCE= pgmHeaders.c pgmRead.c pgmWrite.c pgmBinWrite.c pgmReadBinary.c pgmReduceSize.c
+SRCASS= pgmHeaders.c pgmRead.c pgmWrite.c pgmBinWrite.c pgmReadBinary.c pgmInsert.c pgmEmpty.c
 SRCCOMP = pgmHeaders.c pgmRead.c pgmReadBinary.c pgmCompare.c
 SRCA2B = pgmHeaders.c pgmRead.c pgmBinWrite.c
 SRCB2A = pgmHeaders.c pgmReadBinary.c pgmWrite.c
+OBJASS = $(SRCASS:.c=.o)
 OBJTILE = $(SRCTILE:.c=.o)
 OBJB2A = $(SRCB2A:.c=.o)
 OBJA2B = $(SRCA2B:.c=.o)
@@ -18,7 +20,7 @@ OBJCOMP = $(SRCCOMP:.c=.o)
 .c.o:
 	$(CC) $(CFLAGS) -c -o $@ $<
 
-all: pgmEcho pgmComp pgma2b pgmb2a pgmReduce pgmTile
+all: pgmEcho pgmComp pgma2b pgmb2a pgmReduce pgmTile pgmAssemble
 
 
 
@@ -39,6 +41,9 @@ pgmReduce: pgmReduce.c $(OBJREDUCE)
 
 pgmTile: pgmTile.c $(OBJTILE)
 	$(CC) $(CFLAGS) pgmTile.c $(OBJTILE) -o pgmTile	
+
+pgmAssemble: pgmAssemble.c $(OBJASS)
+	$(CC) $(CFLAGS) pgmAssemble.c $(OBJASS) -o pgmAssemble
 
 pgmHeaders.o: pgmHeaders.c pgmHeaders.h
 	$(CC) $(CFLAGS) -c pgmHeaders.c pgmHeaders.h

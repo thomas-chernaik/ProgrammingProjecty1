@@ -1,8 +1,5 @@
 #lets make all our programs
-make pgmEcho
-make pgmComp
-make pgma2b
-make pgmb2a
+make all
 #test for pgmEcho.
 #first we will test it gives the correct output for an P2 pgm file.
 echo "echoing testfile1 to testfileout1 and testfileout2"

@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include "pgmSubImage.h"
 
-float* subImage(float* file, int startCol, int endCol, int startRow, int endRow, int width){
+float* subImage(float* file, int startRow, int endRow, int startCol, int endCol, int width){
 	float* fileOut = (float*) malloc(sizeof(float) * (endRow - startRow) * (endCol - startCol));
 	if(!file){
 		printf("ERROR: Image Malloc Failed\n");
@@ -11,7 +11,7 @@ float* subImage(float* file, int startCol, int endCol, int startRow, int endRow,
 	int count = 0;
 	for(int i=startCol; i < endCol; i++){
 		for(int j= startRow; j < endRow; j++){
-			fileOut[count++] = file[j*width+i];
+			fileOut[count++] = file[i*width+j];
 		}
 	}
 	return fileOut;
