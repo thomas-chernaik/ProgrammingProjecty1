@@ -56,5 +56,9 @@ pgmReduceSize.o: pgmReduceSize.c pgmReduceSize.h
 	$(CC) $(CFLAGS) -c pgmReduceSize.c pgmReduceSize.h
 pgmSubImage.o: pgmSubImage.c pgmSubImage.h
 	$(CC) $(CFLAGS) -c pgmSubImage.c pgmSubImage.h
+pgmEmpty.o: pgmEmpty.c pgmEmpty.h
+	$(CC) $(CFLAGS) -c pgmEmpty.c pgmEmpty.h
+pgmInsert.o: pgmInsert.c pgmInsert.h
+	$(CC) $(CFLAGS) -c pgmInsert.c pgmInsert.h
 clean:
 	rm -f *.o *.gch pgmEcho pgmComp pgma2b pgmb2a pgmReduce pgmTile

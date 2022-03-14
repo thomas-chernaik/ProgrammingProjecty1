@@ -43,3 +43,7 @@ echo "tiling testfile1 and comparing it to expected tiles"
 ./pgmComp testout_1_0.pgm test_1_0.pgm
 ./pgmComp testout_1_1.pgm test_1_1.pgm
 rm testout_*
+#now we testpgmAssemble
+echo "assembling a tiled file and comparing it to the original file"
+./pgmAssemble testAssemble.pgm 2 2 0 0 test_0_0.pgm 0 1 test_0_1.pgm 1 0 test_1_0.pgm 1 1 test_1_1.pgm
+./pgmComp testAssemble.pgm testfile1.pgm

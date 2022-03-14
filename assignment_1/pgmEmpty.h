@@ -1,1 +1,1 @@
-float* createEmpty(int width, int length);
+float* createEmpty(int width, int height);

@@ -3,7 +3,7 @@
 #include "pgmEmpty.h"
 
 
-float* createEmpty(int width, int length){
+float* createEmpty(int width, int height){
 	float* file = (float*) malloc(width*height*sizeof(float));
 	return file;
 }
