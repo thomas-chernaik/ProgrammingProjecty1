@@ -65,9 +65,9 @@ int main(int argc, char **argv){
 			//calculate the start and end row and col for this tile
 			int startRow, endRow, startCol, endCol;
 			startRow = i*headers[0]/n;
-			endRow = startRow + 1 + headers[0]/n;
+			endRow = startRow + headers[0]/n;
 			startCol = j*headers[1]/n;
-			endCol = startCol + 1 + headers[1]/n;
+			endCol = startCol + headers[1]/n;
 			//get the tile data
 			float* outImage = subImage(file, startCol, endCol, startRow, endRow, headers[0]);
 			//write the tile data to the file
