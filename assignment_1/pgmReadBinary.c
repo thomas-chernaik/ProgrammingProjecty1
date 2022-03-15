@@ -1,9 +1,15 @@
+/*FILENAME: pgmReadBinary.c
+ *FUNCTIONS: 
+ *	readFileBin
+ *	readUntilWhitespace
+ *	readThroughWhitespace
+ */
 #include <stdio.h>
 #include <stdlib.h>
 #include <ctype.h>
 #include "pgmReadBinary.h"
 
-
+//read in a binary pgm file into an array of floats
 float* readFileBin(char* filename, int width, int height, int maxGrey){
 	int numBytesPerValue;//this is 1 if maxGrey is less than 256 otherwise is 2
 	FILE* file;
@@ -35,6 +41,7 @@ float* readFileBin(char* filename, int width, int height, int maxGrey){
 		printf("ERROR: Image Malloc Failedi\n");
 		exit(7);
 	}
+	//read in each byte of data
 	for(int i=0; i<width*height; i++){
 		int scanCount = fread(chr1, sizeof(char), 1, file);
 		if(scanCount != 1){
@@ -64,12 +71,13 @@ float* readFileBin(char* filename, int width, int height, int maxGrey){
 	return fileToReturn;
 		
 }
-
+//read through the file until it encounteres whitespace
 void readUntilWhitespace(FILE *file){
 	//read until isspace is true then back up one
 	char* chr = malloc(sizeof(char));
 	//check if its a comment
 	if(*chr == '#'){
+		readUntilNewline(file);
 		readThroughWhitespace(file);
 		readUntilWhitespace(file);
 	}
@@ -81,7 +89,7 @@ void readUntilWhitespace(FILE *file){
 	//back up one
 	fseek(file, -1, SEEK_CUR);
 }
-
+//read through the file until it encounters non whitespace 
 void readThroughWhitespace(FILE *file){
 	//read until isspace is not true then back up one
 	char* chr = malloc(sizeof(char));
@@ -92,7 +100,16 @@ void readThroughWhitespace(FILE *file){
 	//back up one
 	fseek(file, -1, SEEK_CUR);
 }
-
+//read through the file until it encounters a newline character
+void readUntilNewline(FILE *file){
+	char* chr = malloc(sizeof(char));
+	do{
+		fread(chr, sizeof(char), 1, file);
+	} while(*chr != '\n');
+	free(chr);
+	//back up one
+	fseek(file, -1, SEEK_CUR);
+}
 unsigned int bytesToInt(unsigned char byte1){
 	return (unsigned int) byte1;
 }

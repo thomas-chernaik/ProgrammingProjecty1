@@ -1,11 +1,19 @@
+/*FILENAME: pgmHeaders.c
+ *FUNCTIONS:
+ *	getHeaders
+ *	skipCommenth
+ */
+
 #include <stdio.h>
 #include <stdlib.h>
 #include "pgmHeaders.h"
+//gets the headers from a pgm file
 int* getHeaders(char* filename){
 	FILE *file;
 	//first value is the width, second length, third the maximum grey value, fourth the magic number .
 	int* returnValues = (int*) malloc(5 * sizeof(int));
 	file = fopen(filename, "r");
+	//validate the file opened
 	if(file == NULL){
 		printf("ERROR: Bad File Name (%s)\n", filename);
 		exit(2);
@@ -16,6 +24,10 @@ int* getHeaders(char* filename){
 	//read the magic number it should be the next value in the file
 	char magicNum = fgetc(file);
 	skipCommenth(file);
+	//convert the magic number from a string to an int
+	//at first glance this seems to be an inefficient way of doing
+	//it but we have to validate the magicNum anyways so it is 
+	//actually an efficient method.
 	if(magicNum == '2'){
 		returnValues[3] = 2;
 	}
@@ -53,14 +65,19 @@ int* getHeaders(char* filename){
 	return returnValues;
 }
 
+//skips a line in a pgm file if its a comment.
 void skipCommenth(FILE* file){
+	//assign pointers
 	char* chr = malloc(sizeof(char));
-	char* str = malloc(sizeof(char) * 90);
+	char* str = malloc(sizeof(char) * 90);//hope the comment line isn't longer than 90 chars.
 	fscanf(file, " %c", chr);
+	//check if the first character on the line is a #
 	if(*chr == '#'){
+		//read to the end of the line
 		fgets(str, 90, file);
 	}
 	else{
+		//go back one byte in the file because that wasn't a comment
 		fseek(file, -1, SEEK_CUR);
 	}
 	free(str);

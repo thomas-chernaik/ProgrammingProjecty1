@@ -1,3 +1,9 @@
+/*FILENAME: pgmEcho.c
+ *DESCRIPTION: 
+ *	clone a pgmfile into another file 
+ *	with comprehension of the file structure
+*/
+
 #include <stdio.h>
 #include <stdlib.h>
 #include "pgmHeaders.h"
@@ -6,6 +12,7 @@
 #include "pgmReadBinary.h"
 #include "pgmBinWrite.h"
 int main(int argc, char **argv){
+	//validate the argument count
 	if(argc == 1){
 		printf("Usage: ./pgmEcho inputImage.pgm outputImage.pgm\n");
 		return 0;

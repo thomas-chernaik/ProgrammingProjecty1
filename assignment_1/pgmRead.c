@@ -1,6 +1,14 @@
+/*FILENAME: pgmRead.c
+ *FUNCTIONS:
+ *	readFile
+ *	skipComment
+ */
+
 #include <stdio.h>
 #include <stdlib.h>
 #include "pgmRead.h"
+
+//read in the file filename with the provided header data to a float array
 float* readFile(char* filename, int width, int height, int maxGrey){
 	//initialise and malloc our needed variables
 	FILE *file;
@@ -11,11 +19,12 @@ float* readFile(char* filename, int width, int height, int maxGrey){
 		exit(7);
 	}
 	file = fopen(filename, "r");
+	//check the file opened correctly
 	if(file == NULL){
 		printf("ERROR: Bad File Name (%s)\n", filename);
 		exit(2);
 	}
-	//read out the magic number
+	//read out the magic number, skipping any comments
 	skipComment(file);
 	fgetc(file);
 	skipComment(file);
@@ -23,8 +32,10 @@ float* readFile(char* filename, int width, int height, int maxGrey){
 	int* i = malloc(sizeof(int));
 	int* j = malloc(sizeof(int));
 	int* k = malloc(sizeof(int));
-	//I think we have to have valid memory here even though we don't care about their values
-	//scan out the headers we already know those.
+	//I think we have to have valid memory here 
+	//even though we don't care about their values
+	//scan out the headers we already know those,
+	//skipping any comments.
 	skipComment(file);
 	fscanf(file, " %d", i); 
 	skipComment(file);
@@ -53,14 +64,17 @@ float* readFile(char* filename, int width, int height, int maxGrey){
 	free(listOfInts);
 	return fileToReturn;
 }
+//skip the line in the file if its a comment
 void skipComment(FILE* file){
 	char *chr = malloc(sizeof(char));
 	char* str = malloc(sizeof(char) * 90);
 	fscanf(file, " %c", chr);
 	if(*chr == '#'){
+		//reads to the end of the line
 		fgets(str, 90, file);
 	}
 	else{
+		//undoes the read that wasn't a #
 		fseek(file, -1, SEEK_CUR);
 	}
 	free(str);

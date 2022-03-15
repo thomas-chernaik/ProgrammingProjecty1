@@ -1,3 +1,15 @@
+/*FILENAME: pgmTile.c
+ *FUNCTONS:
+ *	insertRowAndColToString
+ *DESCRIPTION:
+ *	take 3 arguments, an input
+ *	file (either ASCII or binary),
+ *	an integer factor n, 
+ *	and an output file name template. 
+ *	It should divide the input file 
+ *	into nxn smaller images corresponding 
+ *	to parts of the image
+ */
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -8,6 +20,8 @@
 #include "pgmBinWrite.h"
 #include "pgmSubImage.h"
 
+//make the filename to write the tile to 
+//from the format string, the row and the column.
 char* insertRowAndColToString(char* formatString, int rowint, int colint){
 	char* row = (char*) malloc(sizeof(char) * 10);
 	char* col = (char*) malloc(sizeof(char) * 10);
@@ -16,6 +30,8 @@ char* insertRowAndColToString(char* formatString, int rowint, int colint){
 		printf("ERROR: Miscellaneous (malloc failed)\n");
                 exit(100);
 	}
+	//concat together the different parts 
+	//of the filename to outString
 	*outString = '\0';
 	strcat(outString, formatString);
 	sprintf(row, "%d", rowint);
@@ -31,6 +47,7 @@ char* insertRowAndColToString(char* formatString, int rowint, int colint){
 }
 
 int main(int argc, char **argv){
+	//validate argument count
 	if(argc == 1){
 		printf("Usage: ./pgmTile inputImage.pgm tiling_factor outputImage_<row>_<column>.pgm\n");
 		return 0;
@@ -64,18 +81,18 @@ int main(int argc, char **argv){
 			char* fileOut = insertRowAndColToString(argv[3], i, j);
 			//calculate the start and end row and col for this tile
 			int startRow, endRow, startCol, endCol;
-			startRow = i*headers[0]/n;
-			endRow = startRow + headers[0]/n;
-			startCol = j*headers[1]/n;
-			endCol = startCol + headers[1]/n;
+			startRow = i*headers[1];
+			endRow = startRow + headers[1];
+			startCol = j*headers[0];
+			endCol = startCol + headers[0];
 			//get the tile data
 			float* outImage = subImage(file, startCol, endCol, startRow, endRow, headers[0]);
 			//write the tile data to the file
 			if (headers[3] == 2){
-				writeFile(fileOut, outImage, endCol - startCol, endRow - startRow, headers[2]);
+				writeFile(fileOut, outImage, endRow - startRow, endCol - startCol, headers[2]);
 			}
 			else{
-				writeBin(fileOut, outImage, endCol - startCol, endRow - startRow, headers[2]);
+				writeBin(fileOut, outImage, endRow - startRow, endCol - startCol,  headers[2]);
 			}
 			free(fileOut);
 			free(outImage);

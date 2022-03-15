@@ -1,3 +1,8 @@
+/*FILENAME: pgmComp.c
+ *DESCRIPTION:
+ *	take in two file names and output if they are 
+ *	logically identical
+ */
 #include <stdlib.h>
 #include "pgmHeaders.h"
 #include "pgmRead.h"
@@ -5,6 +10,7 @@
 #include "pgmCompare.h"
 
 int main(int argc, char **argv){
+	//validate argument count
 	if(argc == 1){
                 printf("Usage: ./pgmComp inputImage.pgm inputImage.pgm\n");
                 return 0;
@@ -28,6 +34,7 @@ int main(int argc, char **argv){
 	}
 	float* file1;
 	float* file2;
+	//read in the file data of both files
 	if(headers1[3] == 2){
 		file1 = readFile(argv[1], headers1[0], headers1[1], headers1[2]);
 	}
@@ -40,6 +47,7 @@ int main(int argc, char **argv){
         else{
                 file2 = readFileBin(argv[2], headers2[0], headers2[1], headers2[2]);
         }
+	//compare contents of the files 
 	result = compareContents(file1, file2, headers2[0] * headers2[1]);
 	free(file1);
 	free(file2);
