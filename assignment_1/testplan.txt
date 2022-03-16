@@ -2,4 +2,4 @@ In order to test my code I need to make a bash script.
 This bash script needs to compile, then test each of my programs.
 It can compare the output of the programs to an expected output using the diff command.
 It can test that my programs handle errors correctly.
-
+It can test the output of the programs to an expected output using the pgmComp program I have written, so long as the tests for pgmComp pass

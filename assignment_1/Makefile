@@ -66,4 +66,4 @@ pgmEmpty.o: pgmEmpty.c pgmEmpty.h
 pgmInsert.o: pgmInsert.c pgmInsert.h
 	$(CC) $(CFLAGS) -c pgmInsert.c pgmInsert.h
 clean:
-	rm -f *.o *.gch pgmEcho pgmComp pgma2b pgmb2a pgmReduce pgmTile
+	rm -f *.o *.gch pgmEcho pgmComp pgma2b pgmb2a pgmReduce pgmTile pgmAssemble
