@@ -81,18 +81,18 @@ int main(int argc, char **argv){
 			char* fileOut = insertRowAndColToString(argv[3], i, j);
 			//calculate the start and end row and col for this tile
 			int startRow, endRow, startCol, endCol;
-			startRow = i*headers[1];
-			endRow = startRow + headers[1];
-			startCol = j*headers[0];
-			endCol = startCol + headers[0];
+			startRow = i*headers[1]/n;
+			endRow = startRow + headers[1]/n;
+			startCol = j*headers[0]/n;
+			endCol = startCol + headers[0]/n;
 			//get the tile data
 			float* outImage = subImage(file, startCol, endCol, startRow, endRow, headers[0]);
 			//write the tile data to the file
 			if (headers[3] == 2){
-				writeFile(fileOut, outImage, endRow - startRow, endCol - startCol, headers[2]);
+				writeFile(fileOut, outImage, endCol - startCol, endRow - startRow, headers[2]);
 			}
 			else{
-				writeBin(fileOut, outImage, endRow - startRow, endCol - startCol,  headers[2]);
+				writeBin(fileOut, outImage, endCol - startCol, endRow - startRow,  headers[2]);
 			}
 			free(fileOut);
 			free(outImage);

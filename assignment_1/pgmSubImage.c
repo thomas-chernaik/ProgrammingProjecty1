@@ -16,9 +16,9 @@ float* subImage(float* file, int startCol, int endCol, int startRow, int endRow,
 	int count = 0;
 	//go through the pixels between start and end row and col
 	//and put them into the out file
-	for(int i=startCol; i < endCol; i++){
-		for(int j= startRow; j < endRow; j++){
-			fileOut[count++] = file[j*width+i];
+	for(int i=startRow; i < endRow; i++){
+		for(int j= startCol; j < endCol; j++){
+			fileOut[count++] = file[i*width+j];
 		}
 	}
 	return fileOut;
