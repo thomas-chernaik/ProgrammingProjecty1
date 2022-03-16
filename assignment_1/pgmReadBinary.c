@@ -79,11 +79,15 @@ void readUntilWhitespace(FILE *file){
 	if(*chr == '#'){
 		readUntilNewline(file);
 		readThroughWhitespace(file);
-		readUntilWhitespace(file);
 	}
 
 	do{
 		fread(chr, sizeof(char), 1, file);
+		if(*chr == '#'){
+	                readUntilNewline(file);
+        	        readThroughWhitespace(file);
+        	}
+
 	} while(!isspace(*chr));
 	free(chr);
 	//back up one
