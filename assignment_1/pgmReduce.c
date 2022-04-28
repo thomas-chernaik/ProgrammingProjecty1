@@ -26,12 +26,12 @@ int main(int argc, char** argv){
 	int factor = atoi(argv[2]);
 	for(int i=0; i < strlen(argv[2]); i++){
 		if(argv[2][i] > '9' || argv[2][i] < '0'){
-			printf("ERROR: Miscellaneous (non-numeric scaling factor)");
+			printf("ERROR: Miscellaneous (non-numeric scaling factor)\n");
 			exit(100);
 		}
 	}
 	if(factor <= 0){
-		printf("ERROR: Miscellaneous (negative scaling factor)");
+		printf("ERROR: Miscellaneous (negative scaling factor)\n");
 		exit(100);
 	}
 	int* headers;
@@ -51,10 +51,10 @@ int main(int argc, char** argv){
 	//write out the reduced file
 	//check if ascii
 	if(headers[3] == 2){
-		writeFile(argv[3], reducedFile, headers[0]/factor, headers[1]/factor, headers[2]);
+		writeFile(argv[3], reducedFile, (headers[0]%factor != 0) + headers[0]/factor ,(headers[1]%factor != 0) + headers[1]/factor, headers[2]);
 	}
 	else{
-		writeBin(argv[3], reducedFile, headers[0]/factor, headers[1]/factor, headers[2]);
+		writeBin(argv[3], reducedFile, (headers[0]%factor != 0) + headers[0]/factor, (headers[1]%factor != 0) + headers[1]/factor, headers[2]);
 	}
 	free(headers);
 	free(file);
