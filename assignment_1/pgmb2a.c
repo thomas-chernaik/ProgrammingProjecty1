@@ -24,8 +24,8 @@ int main(int argc, char **argv){
 		headers = getHeaders(argv[1]);
 	//check is binary
 	if(headers[3] != 5){
-		printf("ERROR: Bad File Name (%s)\n", argv[1]);
-                return 2;
+		printf("ERROR: Bad Magic Number (%s)\n", argv[1]);
+                return 3;
         }
 	//read in the pgm binary file
 	float* file = readFileBin(argv[1], headers[0], headers[1], headers[2]);

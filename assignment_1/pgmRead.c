@@ -51,7 +51,7 @@ float* readFile(char* filename, int width, int height, int maxGrey){
 		//skipComment(file);
 		int scanCount = fscanf(file, "%d", &listOfInts[i]);
 		//check stuff was read
-		if((scanCount != 1) || (listOfInts[i] < 0) || (listOfInts[i] > 255)){
+		if((listOfInts[i] == EOF || scanCount != 1) || (listOfInts[i] < 0) || (listOfInts[i] > 255)){
 			free(listOfInts);
 			fclose(file);
 			printf("ERROR: Bad Data (%s)", filename);
@@ -59,6 +59,15 @@ float* readFile(char* filename, int width, int height, int maxGrey){
 		}
 		//normalise the pixel and store in variable
 		fileToReturn[i] = (float) listOfInts[i] / (float) maxGrey;
+	}
+	int* c = malloc(sizeof(int));
+	fscanf(file, " ", c);
+	*c = getc(file);
+	if(*c != EOF){
+		free(listOfInts);
+                fclose(file);
+                printf("ERROR: Bad Data (%s)", filename);
+                exit(8);
 	}
 	fclose(file);
 	free(listOfInts);

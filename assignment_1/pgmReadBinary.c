@@ -44,7 +44,7 @@ float* readFileBin(char* filename, int width, int height, int maxGrey){
 	//read in each byte of data
 	for(int i=0; i<width*height; i++){
 		int scanCount = fread(chr1, sizeof(char), 1, file);
-		if(scanCount != 1){
+		if(scanCount != 1 || *chr1 == EOF){
 			free(chr1);
 			free(listOfInts);
 			fclose(file);
@@ -64,6 +64,17 @@ float* readFileBin(char* filename, int width, int height, int maxGrey){
 		}
 		//normalise and store in variable
 		fileToReturn[i] = (float) listOfInts[i] / (float) maxGrey;
+	}
+	int c = getc(file);
+	if(c != EOF){
+		c = getc(file);
+		if(c != EOF){
+			free(chr1);
+        		free(listOfInts);
+	        	fclose(file);
+			printf("ERROR: Bad Data (%s)\n", filename);
+                	exit(8);
+		}
 	}
 	free(chr1);
 	free(listOfInts);

@@ -24,6 +24,16 @@ int main(int argc, char** argv){
 		return 1;
 	}
 	int factor = atoi(argv[2]);
+	for(int i=0; i < strlen(argv[2]); i++){
+		if(argv[2][i] > '9' || argv[2][i] < '0'){
+			printf("ERROR: Miscellaneous (non-numeric scaling factor)");
+			exit(100);
+		}
+	}
+	if(factor <= 0){
+		printf("ERROR: Miscellaneous (negative scaling factor)");
+		exit(100);
+	}
 	int* headers;
         //headers[0] is width, [1] is height, [2] is maxGrey [3] is magic num
         headers = getHeaders(argv[1]);

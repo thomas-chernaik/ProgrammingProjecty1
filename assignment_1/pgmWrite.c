@@ -14,8 +14,8 @@ void writeFile(char* filename, float* fileToWrite, int width, int height, int ma
 	file = fopen(filename, "w+");
 	//check the file opened correctly
 	if(!file){
-		printf("ERROR: Bad File Name (%s)\n", filename);
-		exit(2);
+		printf("ERROR: Output Failed (%s)\n", filename);
+		exit(9);
 	}
 	//read headers into a string and then write string to file
 	char* headers = malloc(sizeof(char)*9);

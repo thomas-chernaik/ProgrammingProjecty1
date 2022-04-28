@@ -23,8 +23,8 @@ int main(int argc, char **argv){
         headers = getHeaders(argv[1]);
 	//check is ascii
 	if(headers[3] != 2){
-		printf("ERROR: Bad File Name (%s)\n", argv[1]);
-		return 2;
+		printf("ERROR: Bad Magic Number (%s)\n", argv[1]);
+		return 3;
 	}
 	//read in the pgmascii file to an array
         float* file = readFile(argv[1], headers[0], headers[1], headers[2]);

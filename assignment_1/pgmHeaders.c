@@ -22,19 +22,13 @@ int* getHeaders(char* filename){
 	fgetc(file);
 	skipCommenth(file);
 	//read the magic number it should be the next value in the file
-	char magicNum = fgetc(file);
+	fscanf(file, "%d", &returnValues[3]);
 	skipCommenth(file);
 	//convert the magic number from a string to an int
 	//at first glance this seems to be an inefficient way of doing
 	//it but we have to validate the magicNum anyways so it is 
 	//actually an efficient method.
-	if(magicNum == '2'){
-		returnValues[3] = 2;
-	}
-	else if(magicNum == '5'){
-		returnValues[3] = 5;
-	}
-	else{
+	if(!(returnValues[3] == 2 || returnValues[3] == 5)){
 		fclose(file);
 		printf("ERROR: Bad Magic Number (%s)\n", filename);
 		exit(3);
@@ -49,13 +43,13 @@ int* getHeaders(char* filename){
 	fscanf(file, " %d", &returnValues[2]);
 	skipCommenth(file);
 	//verify the width and height are valid
-	if(returnValues[0] < 0 || returnValues[1] < 0){
+	if(returnValues[0] < 0 || returnValues[1] < 0 || returnValues[0] > 65535 || returnValues[1] > 65535){
 		fclose(file);
 		printf("ERROR: Bad Dimensions (%s)\n", filename);
 		exit(5);
 	}
 	//verify that the maxgrey value is valid
-	if(returnValues[2] < 0 || returnValues[2] >= 65536){
+	if(returnValues[2] != 255){
 		fclose(file);
 		printf("ERROR: Bad Max Gray Value (%s)\n", filename);
 		exit(6);

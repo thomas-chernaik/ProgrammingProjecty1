@@ -15,14 +15,13 @@ void writeBin(char* filename, float* fileToWrite, int width, int height, int max
 	file = fopen(filename, "wb+");
 	//check the file opened successfully
 	if(!file){
-		printf("ERROR: Bad File Name (%s)\n", filename);
-		exit(2);
+		printf("ERROR: Output Failed (%s)\n", filename);
+		exit(9);
 	}
 	//read headers into a string and then write string to file
 	char* headers = malloc(sizeof(char)*9);
 	sprintf(headers, "P5\n%d %d\n%d\n", width, height, maxGrey);
 	fwrite(headers, sizeof(char), strlen(headers), file);
-	free(headers);
 	int numToPut;
 	char bytes[2];
 	//go through each pixel data and write iet to the file
@@ -38,5 +37,5 @@ void writeBin(char* filename, float* fileToWrite, int width, int height, int max
 			}
 			fwrite(&bytes[1], sizeof(char), 1, file);
 		}
-	}	
+	}
 }
