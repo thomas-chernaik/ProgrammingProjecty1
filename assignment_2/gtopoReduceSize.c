@@ -1,16 +1,16 @@
-/*FILENAME: pgmReduceSize.c
+/*FILENAME: gtopoReduceSize.c
  *FUNCTIONS: reduceSize
  */
 #include <stdio.h>
 #include <stdlib.h>
-#include "pgmReduceSize.h"
+#include "gtopoReduceSize.h"
 //downize the image data in file by factor factor
-float* reduceSize(float* file, int oldwidth, int oldheight, int factor){
+short* reduceSize(short* file, int oldwidth, int oldheight, int factor){
 	//work out the new width and length
 	int width = 1+oldwidth / factor;
 	int height = 1+oldheight / factor ;
 	//initialise the new width
-	float* newFile = malloc(sizeof(float) * width * height);
+	short* newFile = malloc(sizeof(short) * width * height);
 	int pixelIndex = 0;
 	//go through the image data
 	for(int i=0; i<oldheight; i++){

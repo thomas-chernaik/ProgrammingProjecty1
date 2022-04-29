@@ -1,15 +1,15 @@
-/*FILENAME: pgmEmpty.c
+/*FILENAME: gtopoEmpty.c
  *FUNCTIONS:
  *	createEmpty
  */
 
 #include <stdio.h>
 #include <stdlib.h>
-#include "pgmEmpty.h"
+#include "gtopoEmpty.h"
 
 //create an array to be used for image data of length width*height
-float* createEmpty(int width, int height){
-	float* file = (float*) malloc(width*height*sizeof(float));
+short* createEmpty(int width, int height){
+	short* file = (short*) malloc(width*height*sizeof(short));
 	if(!file){
 		printf("ERROR: Image Malloc Failed\n");
 		exit(7);

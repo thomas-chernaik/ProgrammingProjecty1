@@ -1,14 +1,14 @@
-/*FILENAME: pgmSubImage.c
+/*FILENAME: gtopoSubImage.c
  *FUNCTIONS:
  *	subImage
  */
 #include <stdio.h>
 #include <stdlib.h>
-#include "pgmSubImage.h"
+#include "gtopoSubImage.h"
 
 //take in an array of image data and output the image data between the values specified by the parameters
-float* subImage(float* file, int startCol, int endCol, int startRow, int endRow, int width){
-	float* fileOut = (float*) malloc(sizeof(float) * (endRow - startRow) * (endCol - startCol));
+short* subImage(short* file, int startCol, int endCol, int startRow, int endRow, int width){
+	short* fileOut = (short*) malloc(sizeof(short) * (endRow - startRow) * (endCol - startCol));
 	if(!file){
 		printf("ERROR: Image Malloc Failed\n");
 		exit(7);
