@@ -65,6 +65,7 @@ float* readFileBin(char* filename, int width, int height, int maxGrey){
 		//normalise and store in variable
 		fileToReturn[i] = (float) listOfInts[i] / (float) maxGrey;
 	}
+	readThroughWhitespace(file);
 	int c = getc(file);
 	if(c != EOF){
 		c = getc(file);
@@ -109,7 +110,7 @@ void readThroughWhitespace(FILE *file){
 	//read until isspace is not true then back up one
 	char* chr = malloc(sizeof(char));
 	do{
-		fread(chr, sizeof(char), 1, file);
+		*chr = getc(file);
 	} while(isspace(*chr));
 	free(chr);
 	//back up one
