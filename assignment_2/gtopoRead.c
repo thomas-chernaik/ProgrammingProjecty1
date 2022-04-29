@@ -9,10 +9,10 @@
 #include <stdlib.h>
 #include "gtopoRead.h"
 
-unsigned short* readFile(char* filename, int width, int height){
+short* readFile(char* filename, int width, int height){
 	//init and malloc needed variables
 	FILE *file;
-	unsigned short* fileToReturn  = (unsigned short*) malloc(width*height*sizeof(unsigned short));
+	short* fileToReturn  = (short*) malloc(width*height*sizeof(short));
 	if(!fileToReturn){
 		printf("ERROR: Image Malloc Failed\n");
 		exit(7);
@@ -37,8 +37,8 @@ unsigned short* readFile(char* filename, int width, int height){
 
 }
 
-unsigned short readInt(FILE* file){
-	unsigned char* chr1 = malloc(sizeof(char)*2);
+short readInt(FILE* file){
+	char* chr1 = malloc(sizeof(char)*2);
 	int scanCount = fread(chr1, 2,1,file);
 	if(scanCount != 2){
 		free(chr1);
@@ -46,7 +46,7 @@ unsigned short readInt(FILE* file){
 		printf("ERROR: Bad Data (%s)\n", filename);
                 exit(8);
 	}
-	unsigned short returnNum = chr1[0] << 8 | chr1[1];
+	short returnNum = chr1[0] << 8 | chr1[1];
 	return returnNum;
 }
 
