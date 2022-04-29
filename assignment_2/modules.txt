@@ -1,0 +1,16 @@
+proposed modules:
+gtopoRead - a module which will read the dem file to an array
+gtopoWrite - a module which will write an array to a dem file
+gtopoCompare - a module which will take two arrays and compare them
+gtopoReduceSize - a module which will take an array and a factor and output an array reduced by the factor
+gtopoSubImage - a module which will take an array and a start and end column and aend row and output that subImage for those rows and columns
+gtopoInsert - a module which will take an output image, an input image and a row and column in the output image to insert the input image.
+gtopoEmpty - a module which will take a width and length and output an array of width and length specified
+
+all will use gtopoRead and gtopoWrite
+gtopoReduce wil use gtopoReduceSize
+gtopoTile will use gtopoSubImage
+gtopoAssemble will use gtopoInsert and gtopotEmpty
+
+All of these modules can be adapted from modules used in assignment_1
+
