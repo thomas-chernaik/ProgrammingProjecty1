@@ -1,1 +1,1 @@
-void writeFile(char* filename, char* fileToWrite, int width, int length);
+void writeFile(char* filename, short* fileToWrite, int width, int length);

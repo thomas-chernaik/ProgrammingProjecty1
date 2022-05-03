@@ -20,7 +20,7 @@ void writeFile(char* filename, short* fileToWrite, int width, int height){
 	//go through each int one by one and write it
 	for(int i=0; i<width*height; i++){
 		//we need to make sure we write the values in big endian
-		bytes[0] = (unsigned char) fileToWrite[i] >> 8;
+		bytes[0] = (unsigned char) (fileToWrite[i] >> 8);
 		bytes[1] = (unsigned char) fileToWrite[i] & 255;
 		fwrite(&bytes[0], sizeof(unsigned char), 1, file);
 		fwrite(&bytes[1], sizeof(unsigned char), 1, file);

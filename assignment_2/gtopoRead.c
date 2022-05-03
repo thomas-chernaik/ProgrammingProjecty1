@@ -25,7 +25,7 @@ short* readFile(char* filename, int width, int height){
 	}
 	//read in the data from the file
 	for(int i=0; i<width*height; i++){
-		fileToReturn[i] = readInt(file);
+		fileToReturn[i] = readInt(file, filename);
 	}
 	int c = getc(file);
 	fclose(file);
@@ -34,19 +34,20 @@ short* readFile(char* filename, int width, int height){
 		printf("ERROR: Bad Data (%s)\n", filename);
                 exit(8);
 	}
+	return fileToReturn;
 
 }
 
-short readInt(FILE* file){
-	char* chr1 = malloc(sizeof(char)*2);
-	int scanCount = fread(chr1, 2,1,file);
+short readInt(FILE* file, char* filename){
+	unsigned char* chr1 = malloc(sizeof(char)*2);
+	int scanCount = fread(chr1, sizeof(char), 2, file);
 	if(scanCount != 2){
 		free(chr1);
 		fclose(file);
 		printf("ERROR: Bad Data (%s)\n", filename);
                 exit(8);
 	}
-	short returnNum = chr1[0] << 8 | chr1[1];
+	short returnNum = (chr1[0] << 8) |  chr1[1];
 	return returnNum;
 }
 
