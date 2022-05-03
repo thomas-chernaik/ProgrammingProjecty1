@@ -18,7 +18,3 @@ int compareContents(short* file1, short* file2, int widthlength){
 	return 1;
 
 }
-//compares two int arrays and checks the first 3 values are the same
-int compareHeaders(int* headers1, int* headers2){
-	return headers1[1] == headers2[1] && headers1[2] == headers2[2] && headers1[0] == headers2[0];
-}
