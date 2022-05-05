@@ -38,7 +38,7 @@ int main(int argc, char **argv){
 	int type = 2;
 	char* filename = argv[1];
 	//create the image to paste the other images onto
-	float** file = createEmpty(width, height);
+	unsigned char** file = createEmpty(width, height);
 	//now we have to loop through all the different images to put on it
 	for(int i=1; i < (argc-1)/3; i++){
 		int row = atoi(argv[i*3+1]);
@@ -49,7 +49,7 @@ int main(int argc, char **argv){
 		//assigne the maxGrey and type variables
 		maxGrey = headers[2];
 		type = headers[3];
-		float** fileToInsert;
+		unsigned char** fileToInsert;
 		headers = getHeaders(fileNamei);
 		//read the file in
 		if(headers[3] == 2){

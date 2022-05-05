@@ -1,6 +1,6 @@
 /*FILENAME: pgmWrite.c
  *DESCRIPTION:
- *	take an array of floats, header values, and a filename and write
+ *	take an array of unsigned chars, header values, and a filename and write
  *	a pgmFile with the provided data to the file "filename"
  */
 
@@ -8,7 +8,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-void writeFile(char* filename, float** fileToWrite, int width, int height, int maxGrey){
+void writeFile(char* filename, unsigned char** fileToWrite, int width, int height, int maxGrey){
 	//open the file to write
 	FILE *file;
 	file = fopen(filename, "w+");
@@ -38,7 +38,7 @@ void writeFile(char* filename, float** fileToWrite, int width, int height, int m
 	//go through the data and write it all to the file
 	for(int i=0; i<height; i++){
 		for(int j=0; j<width; j++){
-			//we need to do the +0.5f and round down to avoid any floating point errors because we don't want those
+			//we need to do the +0.5f and round down to avoid any unsigned charing point errors because we don't want those
 			numToPut = (int) (fileToWrite[i][j] * maxGrey)+0.5f;
 			sprintf(stringToPut, "%d", numToPut);
 			fputs(stringToPut, file);

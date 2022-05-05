@@ -1,1 +1,1 @@
-void writeFile(char* filename, float** fileToWrite, int width, int length, int maxGrey);
+void writeFile(char* filename, unsigned char** fileToWrite, int width, int length, int maxGrey);

@@ -5,14 +5,14 @@
 #include <stdlib.h>
 #include "pgmReduceSize.h"
 //downize the image data in file by factor factor
-float** reduceSize(float** file, int oldwidth, int oldheight, int factor){
+unsigned char** reduceSize(unsigned char** file, int oldwidth, int oldheight, int factor){
 	//work out the new width and length
 	int width = 1+oldwidth / factor;
 	int height = 1+oldheight / factor ;
 	//initialise the new width
-	float** newFile = (float**) malloc(sizeof(float) * height);
+	unsigned char** newFile = (unsigned char**) malloc(sizeof(unsigned char) * height);
 	for(int i=0; i<height; i++){
-		newFile[i] = (float*) malloc(sizeof(float) * width);
+		newFile[i] = (unsigned char*) malloc(sizeof(unsigned char) * width);
 	}
 	int pixelIndexi = 0;
 	int pixelIndexj = 0;

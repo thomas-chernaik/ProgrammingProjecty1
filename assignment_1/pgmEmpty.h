@@ -1,1 +1,1 @@
-float** createEmpty(int width, int height);
+unsigned char** createEmpty(int width, int height);

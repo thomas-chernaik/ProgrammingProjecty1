@@ -32,8 +32,8 @@ int main(int argc, char **argv){
 		printf("DIFFERENT\n");
 		return 0;
 	}
-	float** file1;
-	float** file2;
+	unsigned char** file1;
+	unsigned char** file2;
 	//read in the file data of both files
 	if(headers1[3] == 2){
 		file1 = readFile(argv[1], headers1[0], headers1[1], headers1[2]);

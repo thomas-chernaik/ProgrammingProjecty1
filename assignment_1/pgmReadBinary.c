@@ -9,10 +9,10 @@
 #include <ctype.h>
 #include "pgmReadBinary.h"
 
-//read in a binary pgm file into an array of floats
+//read in a binary pgm file into an array of unsigned chars
 unsigned char** readFileBin(FILE* file, char* filename, int width, int height){
 	//initialise and malloc our needed variables
-	//creating an array of pointers to a float
+	//creating an array of pointers to a unsigned char
 	//1. allocate memory for the data
 	//1a. compute how much memory we need for the image data
 	int memoryNeeded = height*width*sizeof(unsigned char);

@@ -10,10 +10,10 @@
 
 
 
-//read in the file filename with the provided header data to a float array
+//read in the file filename with the provided header data to a unsigned char array
 unsigned char** readFile(FILE* file, char* filename, int width, int height){
 	//initialise and malloc our needed variables
-	//creating an array of pointers to a float
+	//creating an array of pointers to a unsigned char
 	//1. allocate memory for the data
 	//1a. compute how much memory we need for the image data
 	int memoryNeeded = height*width*sizeof(unsigned char);

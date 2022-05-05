@@ -8,8 +8,8 @@
 #include <stdlib.h>
 #include "pgmCompare.h"
 
-//compares two float arrays of length widthlength and checks they are identical
-int compareContents(float** file1, float** file2, int width, int height){
+//compares two unsigned char arrays of length widthlength and checks they are identical
+int compareContents(unsigned char** file1, unsigned char** file2, int width, int height){
 	for(int i=0; i<width; i++){
 		for(int j=0; j<height; j++){
 			if(file1[j][i] != file2[j][i]){
