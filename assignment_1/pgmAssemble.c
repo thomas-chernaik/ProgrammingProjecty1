@@ -38,7 +38,7 @@ int main(int argc, char **argv){
 	int type = 2;
 	char* filename = argv[1];
 	//create the image to paste the other images onto
-	unsigned char** file = createEmpty(width, height);
+	unsigned char** imageData = createEmpty(width, height);
 	//now we have to loop through all the different images to put on it
 	for(int i=1; i < (argc-1)/3; i++){
 		int row = atoi(argv[i*3+1]);
@@ -46,31 +46,30 @@ int main(int argc, char **argv){
 		char* fileNamei = argv[i*3+3];
 		//open the file
 		int* headers;
-		//assigne the maxGrey and type variables
-		maxGrey = headers[2];
-		type = headers[3];
 		unsigned char** fileToInsert;
-		headers = getHeaders(fileNamei);
+		FILE* file = openFile(fileNamei);
+		headers = getHeaders(fileNamei, file);
+		type = headers[3];
 		//read the file in
 		if(headers[3] == 2){
-			fileToInsert = readFile(fileNamei, headers[0], headers[1], headers[2]);
+			fileToInsert = readFile(file, fileNamei, headers[0], headers[1]);
 		}
 		else{
-			fileToInsert = readFileBin(fileNamei, headers[0], headers[1], headers[2]);
+			fileToInsert = readFileBin(file, fileNamei, headers[0], headers[1]);
 		}
 		//add the file data to the big file in the right place
-		insert(fileToInsert, file, row, col, width, height, headers[0], headers[1]);
+		insert(fileToInsert, imageData, row, col, width, height, headers[0], headers[1]);
 		free(headers);
 		free(fileToInsert);
 	}
 	//write out the big file
 	if(type == 2){
-		writeFile(filename, file, width, height, maxGrey);
+		writeFile(filename, imageData, width, height, maxGrey);
 	}
 	else{
-		writeBin(filename, file, width, height, maxGrey);
+		writeBin(filename, imageData, width, height, maxGrey);
 	}
-	free(file);
+	free(imageData);
 	printf("ASSEMBLED\n");
 	return 0;
 }

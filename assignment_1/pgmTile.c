@@ -59,19 +59,20 @@ int main(int argc, char **argv){
 	char rowcolcmp[] = {'_', '<', 'r', 'o', 'w', '>'};
         char* row_col = strstr(argv[3], rowcolcmp);
         *row_col = '\0';
-	
+	//open the file
+	FILE* file = openFile(argv[1]);
 	int* headers;
 	//headers[0] is width, [1] is height, [2] is maxGrey [3] is magic num
-	headers = getHeaders(argv[1]);
+	headers = getHeaders(argv[1], file);
 	//check if binary or asci
-	unsigned char** file;
+	unsigned char** imageData;
 	if (headers[3] == 2){	
 		//if ascii read the ascii file.
-		file = readFile(argv[1], headers[0], headers[1], headers[2]);
+		imageData = readFile(file, argv[1], headers[0], headers[1]);
 	}
 	else{
 		//else its binary so read the binary file
-		file = readFileBin(argv[1], headers[0], headers[1], headers[2]);
+		imageData = readFileBin(file, argv[1], headers[0], headers[1]);
 	}
 	//now we need to get the subImages from the file.
 	int n = atoi(argv[2]);
@@ -96,7 +97,7 @@ int main(int argc, char **argv){
 				endCol = startCol + headers[0]/n;
 			}
 			//get the tile data
-			unsigned char** outImage = subImage(file, startCol, endCol, startRow, endRow, headers[0]);
+			unsigned char** outImage = subImage(imageData, startCol, endCol, startRow, endRow, headers[0]);
 			//write the tile data to the file
 			if (headers[3] == 2){
 				writeFile(fileOut, outImage, endCol - startCol, endRow - startRow, headers[2]);
@@ -109,7 +110,7 @@ int main(int argc, char **argv){
 		}
 	}
 	free(headers);
-	free(file);
+	free(imageData);
 	printf("TILED\n");
 	return 0;
 }

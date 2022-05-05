@@ -19,19 +19,20 @@ int main(int argc, char **argv){
                 printf("ERROR: Bad Argument Count\n");
                 return 1;
         }
+	FILE* file = openFile(argv[1]);
         int* headers;
 	//headers[0] is width, [1] is height, [2] is maxGrey [3] is magic num
-		headers = getHeaders(argv[1]);
+		headers = getHeaders(argv[1], file);
 	//check is binary
 	if(headers[3] != 5){
 		printf("ERROR: Bad Magic Number (%s)\n", argv[1]);
                 return 3;
         }
 	//read in the pgm binary file
-	unsigned char** file = readFileBin(argv[1], headers[0], headers[1], headers[2]);
+	unsigned char** imageData = readFileBin(file, argv[1], headers[0], headers[1]);
 	//write out the file data to a pgm ascii file
-	writeFile(argv[2], file, headers[0], headers[1], headers[2]);
-        free(file);
+	writeFile(argv[2], imageData, headers[0], headers[1], headers[3]);
+        free(imageData);
         free(headers);
         printf("CONVERTED\n");
         return 0;

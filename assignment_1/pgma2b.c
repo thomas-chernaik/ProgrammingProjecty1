@@ -20,17 +20,18 @@ int main(int argc, char **argv){
         }
         int* headers;
 	//headers[0] is width, [1] is height, [2] is maxGrey [3] is magic num
-        headers = getHeaders(argv[1]);
+	FILE* file = openFile(argv[1]);
+        headers = getHeaders(argv[1], file);
 	//check is ascii
 	if(headers[3] != 2){
 		printf("ERROR: Bad Magic Number (%s)\n", argv[1]);
 		return 3;
 	}
 	//read in the pgmascii file to an array
-        unsigned char** file = readFile(argv[1], headers[0], headers[1], headers[2]);
+        unsigned char** imageData = readFile(file, argv[1], headers[0], headers[1]);
 	//write out the array to a pgmbinary file
-        writeBin(argv[2], file, headers[0], headers[1], headers[2]);
-	free(file);
+        writeBin(argv[2], imageData, headers[0], headers[1], headers[2]);
+	free(imageData);
 	free(headers);
 	printf("CONVERTED\n");
 	return 0;

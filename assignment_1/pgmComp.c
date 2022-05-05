@@ -19,10 +19,12 @@ int main(int argc, char **argv){
                 printf("ERROR: Bad Argument Count\n");
                 return 1;
         }
+	FILE* file1 = openFile(argv[1]);
+	FILE* file2 = openFile(argv[2]);
 	int* headers1;
 	int* headers2;
-	headers1 = getHeaders(argv[1]);
-	headers2 = getHeaders(argv[2]);
+	headers1 = getHeaders(argv[1], file1);
+	headers2 = getHeaders(argv[2], file2);
 	//check headers match
 	int result;
 	result = compareHeaders(headers1, headers2);
@@ -32,25 +34,25 @@ int main(int argc, char **argv){
 		printf("DIFFERENT\n");
 		return 0;
 	}
-	unsigned char** file1;
-	unsigned char** file2;
+	unsigned char** imageData1;
+	unsigned char** imageData2;
 	//read in the file data of both files
 	if(headers1[3] == 2){
-		file1 = readFile(argv[1], headers1[0], headers1[1], headers1[2]);
+		imageData1 = readFile(file1, argv[1], headers1[0], headers1[1]);
 	}
 	else{
-		file1 = readFileBin(argv[1], headers1[0], headers1[1], headers1[2]);
+		imageData1 = readFileBin(file1, argv[1], headers1[0], headers1[1]);
 	}
 	if(headers2[3] == 2){
-                file2 = readFile(argv[2], headers2[0], headers2[1], headers2[2]);
+                imageData2 = readFile(file2, argv[2], headers2[0], headers2[1]);
         }
         else{
-                file2 = readFileBin(argv[2], headers2[0], headers2[1], headers2[2]);
+                imageData2 = readFileBin(file2, argv[2], headers2[0], headers2[1]);
         }
 	//compare contents of the files 
-	result = compareContents(file1, file2, headers2[0], headers2[1]);
-	free(file1);
-	free(file2);
+	result = compareContents(imageData1, imageData2, headers2[0], headers2[1]);
+	free(imageData1);
+	free(imageData2);
 	free(headers1);
 	free(headers2);
 	if(!result){

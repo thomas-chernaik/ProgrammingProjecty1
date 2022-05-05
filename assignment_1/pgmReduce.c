@@ -34,20 +34,22 @@ int main(int argc, char** argv){
 		printf("ERROR: Miscellaneous (negative scaling factor)\n");
 		exit(100);
 	}
+	//open file
+	FILE* file = openFile(argv[1]);
 	int* headers;
         //headers[0] is width, [1] is height, [2] is maxGrey [3] is magic num
-        headers = getHeaders(argv[1]);
-	unsigned char** file;
+        headers = getHeaders(argv[1], file);
+	unsigned char** imageData;
 	//read in the file
 	//check if ascii
 	if(headers[3] == 2){
-		file = readFile(argv[1], headers[0], headers[1], headers[2]);
+		imageData = readFile(file, argv[1], headers[0], headers[1]);
 	}
 	else{
-		file = readFileBin(argv[1], headers[0], headers[1], headers[2]);
+		imageData = readFileBin(file, argv[1], headers[0], headers[1]);
 	}
 	unsigned char** reducedFile;
-	reducedFile = reduceSize(file, headers[0], headers[1], factor);
+	reducedFile = reduceSize(imageData, headers[0], headers[1], factor);
 	//write out the reduced file
 	//check if ascii
 	if(headers[3] == 2){
