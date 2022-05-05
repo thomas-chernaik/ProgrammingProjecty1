@@ -7,17 +7,22 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "pgmHeaders.h"
+
+//open a file
+FILE* openFile(char* filename){
+	FILE* file;
+	file = fopen(filename, "r");
+        //validate the file opened
+        if(file == NULL){
+                printf("ERROR: Bad File Name (%s)\n", filename);
+                exit(2);
+	}
+}
+
 //gets the headers from a pgm file
-int* getHeaders(char* filename){
-	FILE *file;
+int* getHeaders(char* filename, FILE* file){
 	//first value is the width, second length, third the maximum grey value, fourth the magic number .
 	int* returnValues = (int*) malloc(5 * sizeof(int));
-	file = fopen(filename, "r");
-	//validate the file opened
-	if(file == NULL){
-		printf("ERROR: Bad File Name (%s)\n", filename);
-		exit(2);
-	}
 	//clear the P from the magic number
 	fgetc(file);
 	skipCommenth(file);

@@ -1,3 +1,4 @@
 #include <stdio.h>
-int* getHeaders(char* filename);
+FILE* openFile(char* filename);
+int* getHeaders(char* filename, FILE* file);
 void skipCommenth(FILE* file);

@@ -64,7 +64,7 @@ int main(int argc, char **argv){
 	//headers[0] is width, [1] is height, [2] is maxGrey [3] is magic num
 	headers = getHeaders(argv[1]);
 	//check if binary or asci
-	float* file;
+	float** file;
 	if (headers[3] == 2){	
 		//if ascii read the ascii file.
 		file = readFile(argv[1], headers[0], headers[1], headers[2]);
@@ -96,7 +96,7 @@ int main(int argc, char **argv){
 				endCol = startCol + headers[0]/n;
 			}
 			//get the tile data
-			float* outImage = subImage(file, startCol, endCol, startRow, endRow, headers[0]);
+			float** outImage = subImage(file, startCol, endCol, startRow, endRow, headers[0]);
 			//write the tile data to the file
 			if (headers[3] == 2){
 				writeFile(fileOut, outImage, endCol - startCol, endRow - startRow, headers[2]);

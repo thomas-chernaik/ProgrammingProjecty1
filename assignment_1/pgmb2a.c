@@ -28,7 +28,7 @@ int main(int argc, char **argv){
                 return 3;
         }
 	//read in the pgm binary file
-	float* file = readFileBin(argv[1], headers[0], headers[1], headers[2]);
+	float** file = readFileBin(argv[1], headers[0], headers[1], headers[2]);
 	//write out the file data to a pgm ascii file
 	writeFile(argv[2], file, headers[0], headers[1], headers[2]);
         free(file);

@@ -27,13 +27,13 @@ int main(int argc, char **argv){
 	//check if binary or ascii
 	if (headers[3] == 2){	
 		//if ascii read and write the ascii file.
-		float* file = readFile(argv[1], headers[0], headers[1], headers[2]);
+		float** file = readFile(argv[1], headers[0], headers[1], headers[2]);
 		writeFile(argv[2], file, headers[0], headers[1], headers[2]);
 		free(file);
 	}
 	else{
 		//else its binary so read and write the binary file
-		float* file = readFileBin(argv[1], headers[0], headers[1], headers[2]);
+		float** file = readFileBin(argv[1], headers[0], headers[1], headers[2]);
 		writeBin(argv[2], file, headers[0], headers[1], headers[2]);
 		free(file);
 	

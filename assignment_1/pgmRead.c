@@ -8,84 +8,74 @@
 #include <stdlib.h>
 #include "pgmRead.h"
 
+
+
 //read in the file filename with the provided header data to a float array
-float* readFile(char* filename, int width, int height, int maxGrey){
+unsigned char** readFile(FILE* file, char* filename, int width, int height){
 	//initialise and malloc our needed variables
-	FILE *file;
-	float* fileToReturn = (float*) malloc(width*height*sizeof(float));
-	int* listOfInts = (int*) malloc(width*height*sizeof(int));
-	if(!fileToReturn || !listOfInts){//check malloc succeeded
+	//creating an array of pointers to a float
+	//1. allocate memory for the data
+	//1a. compute how much memory we need for the image data
+	int memoryNeeded = height*width*sizeof(unsigned char);
+	//1b. call malloc to allocate it
+	//1c. store it somewhere.
+	unsigned char* imageData = (unsigned char*) malloc(memoryNeeded);
+	//1d. check whether it didn't work
+	if(imageData == NULL)
+		{
 		printf("ERROR: Image Malloc Failed\n");
-		exit(7);
-	}
-	file = fopen(filename, "r");
-	//check the file opened correctly
-	if(file == NULL){
-		printf("ERROR: Bad File Name (%s)\n", filename);
-		exit(2);
-	}
-	//read out the magic number, skipping any comments
-	skipComment(file);
-	fgetc(file);
-	skipComment(file);
-	fgetc(file);
-	int* i = malloc(sizeof(int));
-	int* j = malloc(sizeof(int));
-	int* k = malloc(sizeof(int));
-	//I think we have to have valid memory here 
-	//even though we don't care about their values
-	//scan out the headers we already know those,
-	//skipping any comments.
-	skipComment(file);
-	fscanf(file, " %d", i); 
-	skipComment(file);
-	fscanf(file, " %d", j);
-	skipComment(file);
-	fscanf(file, " %d", k);
-	skipComment(file);
-	free(i);
-	free(j);
-	free(k);
-	//read out each pixel
-	for(int i=0; i<width*height; i++){
-		//skipComment(file);
-		int scanCount = fscanf(file, "%d", &listOfInts[i]);
-		//check stuff was read
-		if((listOfInts[i] == EOF || scanCount != 1) || (listOfInts[i] < 0) || (listOfInts[i] > 255)){
-			free(listOfInts);
-			fclose(file);
-			printf("ERROR: Bad Data (%s)", filename);
-			exit(8);
+                exit(7);
 		}
-		//normalise the pixel and store in variable
-		fileToReturn[i] = (float) listOfInts[i] / (float) maxGrey;
+
+	//2. allocate memory for the row pointers
+	//2a. compute memory we need for malloc
+	memoryNeeded = height*sizeof(unsigned char*);
+	//2b. call malloc to allocate them
+	unsigned char** rowsOfImageData = (unsigned char**) malloc(memoryNeeded);
+	//2c. store them somewhere
+	//2d. check it worked
+	if(rowsOfImageData == NULL)
+		{
+			printf("ERROR: Image Malloc Failed\n");
+	                exit(7);
+		}
+	//3. set each row pointer to point to the correct place in the data
+	//3a. loop through the rows(height)
+	for(int i=0; i<height; i++)
+		{
+		
+		//3b. compute the location of this row in the base data.
+		unsigned char* location = &imageData[i*width];
+		//3c. store it in the correct row pointer.
+		rowsOfImageData[i] = location;
+		}
+	//read out each pixel
+	//loop through each row and column
+	for(int i=0; i<height; i++){
+		for(int j=0; j<width; j++){
+			//read the data for this pixel
+			int scanCount = fscanf(file, "%d", &rowsOfImageData[i][j]);
+			//check stuff was read
+			if((rowsOfImageData[i][j] == EOF || scanCount != 1) || (rowsOfImageData[i][j] < 0) || (rowsOfImageData[i][j] > 255)){
+				free(rowsOfImageData);
+				fclose(file);
+				printf("ERROR: Bad Data (%s)", filename);
+				exit(8);
+			}
+		}
 	}
+	//check we are at the end of the file
 	int* c = malloc(sizeof(int));
+	//scan out any whitespace at the end of the file
 	fscanf(file, " ", c);
+	//check we are at the EOF character
 	*c = getc(file);
 	if(*c != EOF){
-		free(listOfInts);
+		free(rowsOfImageData);
                 fclose(file);
                 printf("ERROR: Bad Data (%s)", filename);
                 exit(8);
 	}
 	fclose(file);
-	free(listOfInts);
-	return fileToReturn;
-}
-//skip the line in the file if its a comment
-void skipComment(FILE* file){
-	char *chr = malloc(sizeof(char));
-	char* str = malloc(sizeof(char) * 90);
-	fscanf(file, " %c", chr);
-	if(*chr == '#'){
-		//reads to the end of the line
-		fgets(str, 90, file);
-	}
-	else{
-		//undoes the read that wasn't a #
-		fseek(file, -1, SEEK_CUR);
-	}
-	free(str);
-	free(chr);
+	return rowsOfImageData;
 }

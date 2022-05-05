@@ -8,7 +8,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-void writeFile(char* filename, float* fileToWrite, int width, int height, int maxGrey){
+void writeFile(char* filename, float** fileToWrite, int width, int height, int maxGrey){
 	//open the file to write
 	FILE *file;
 	file = fopen(filename, "w+");
@@ -39,7 +39,7 @@ void writeFile(char* filename, float* fileToWrite, int width, int height, int ma
 	for(int i=0; i<height; i++){
 		for(int j=0; j<width; j++){
 			//we need to do the +0.5f and round down to avoid any floating point errors because we don't want those
-			numToPut = (int) (fileToWrite[i*width+j] * maxGrey)+0.5f;
+			numToPut = (int) (fileToWrite[i][j] * maxGrey)+0.5f;
 			sprintf(stringToPut, "%d", numToPut);
 			fputs(stringToPut, file);
 			lineLength += strlen(stringToPut);

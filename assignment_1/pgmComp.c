@@ -32,8 +32,8 @@ int main(int argc, char **argv){
 		printf("DIFFERENT\n");
 		return 0;
 	}
-	float* file1;
-	float* file2;
+	float** file1;
+	float** file2;
 	//read in the file data of both files
 	if(headers1[3] == 2){
 		file1 = readFile(argv[1], headers1[0], headers1[1], headers1[2]);
@@ -48,7 +48,7 @@ int main(int argc, char **argv){
                 file2 = readFileBin(argv[2], headers2[0], headers2[1], headers2[2]);
         }
 	//compare contents of the files 
-	result = compareContents(file1, file2, headers2[0] * headers2[1]);
+	result = compareContents(file1, file2, headers2[0], headers2[1]);
 	free(file1);
 	free(file2);
 	free(headers1);

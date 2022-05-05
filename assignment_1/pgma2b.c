@@ -27,7 +27,7 @@ int main(int argc, char **argv){
 		return 3;
 	}
 	//read in the pgmascii file to an array
-        float* file = readFile(argv[1], headers[0], headers[1], headers[2]);
+        float** file = readFile(argv[1], headers[0], headers[1], headers[2]);
 	//write out the array to a pgmbinary file
         writeBin(argv[2], file, headers[0], headers[1], headers[2]);
 	free(file);

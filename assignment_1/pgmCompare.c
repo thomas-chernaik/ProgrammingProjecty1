@@ -9,10 +9,12 @@
 #include "pgmCompare.h"
 
 //compares two float arrays of length widthlength and checks they are identical
-int compareContents(float* file1, float* file2, int widthlength){
-	for(int i=0; i<widthlength; i++){
-		if(file1[i] != file2[i]){
-			return 0;
+int compareContents(float** file1, float** file2, int width, int height){
+	for(int i=0; i<width; i++){
+		for(int j=0; j<height; j++){
+			if(file1[j][i] != file2[j][i]){
+				return 0;
+			}
 		}
 	}
 	return 1;

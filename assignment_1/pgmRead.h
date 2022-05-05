@@ -1,3 +1,4 @@
 #include <stdio.h>
-float* readFile(char* filename, int width, int height, int maxGrey);
-void skipComment(FILE* file);
+unsigned char** readFile(FILE* file, char* filename, int width, int height);
+//I need to create a function to allocate the 2d array
+//change to pass in file pointer

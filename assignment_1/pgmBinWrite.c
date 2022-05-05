@@ -9,7 +9,7 @@
 #include "pgmBinWrite.h"
 
 //write file data and headers to a binary pgm file
-void writeBin(char* filename, float* fileToWrite, int width, int height, int maxGrey){
+void writeBin(char* filename, float** fileToWrite, int width, int height, int maxGrey){
 	//open the file to write
 	FILE *file;
 	file = fopen(filename, "wb+");
@@ -29,7 +29,7 @@ void writeBin(char* filename, float* fileToWrite, int width, int height, int max
 		for(int j=0; j<width; j++){
 			//we need to do the +0.5f and round down
 			//to avoid any floating point errors
-			numToPut = (int) (fileToWrite[i*width+j] * maxGrey) + 0.5f;
+			numToPut = (int) (fileToWrite[i][j] * maxGrey) + 0.5f;
 			bytes[0] = numToPut/256;
 			bytes[1] = numToPut%256;
 			if(maxGrey > 255){
