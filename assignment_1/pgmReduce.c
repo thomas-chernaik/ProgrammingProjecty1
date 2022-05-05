@@ -59,7 +59,7 @@ int main(int argc, char** argv){
 		writeBin(argv[3], reducedFile, (headers[0]%factor != 0) + headers[0]/factor, (headers[1]%factor != 0) + headers[1]/factor, headers[2]);
 	}
 	free(headers);
-	free(file);
+	free(imageData);
 	free(reducedFile);
 	printf("REDUCED\n");
 	return 0;

@@ -12,7 +12,7 @@
 void writeBin(char* filename, unsigned char** fileToWrite, int width, int height, int maxGrey){
 	//open the file to write
 	FILE *file;
-	file = fopen(filename, "wb+");
+	file = fopen(filename, "w+");
 	//check the file opened successfully
 	if(!file){
 		printf("ERROR: Output Failed (%s)\n", filename);
@@ -22,20 +22,10 @@ void writeBin(char* filename, unsigned char** fileToWrite, int width, int height
 	char* headers = malloc(sizeof(char)*9);
 	sprintf(headers, "P5\n%d %d\n%d\n", width, height, maxGrey);
 	fwrite(headers, sizeof(char), strlen(headers), file);
-	int numToPut;
-	char bytes[2];
 	//go through each pixel data and write iet to the file
 	for(int i=0; i<height; i++){
 		for(int j=0; j<width; j++){
-			//we need to do the +0.5f and round down
-			//to avoid any unsigned charing point errors
-			numToPut = (int) (fileToWrite[i][j] * maxGrey) + 0.5f;
-			bytes[0] = numToPut/256;
-			bytes[1] = numToPut%256;
-			if(maxGrey > 255){
-				fwrite(&bytes[0], sizeof(char), 1, file);
-			}
-			fwrite(&bytes[1], sizeof(char), 1, file);
+			fwrite(&fileToWrite[i][j], sizeof(unsigned char), 1, file);
 		}
 	}
 }

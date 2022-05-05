@@ -60,7 +60,6 @@ int* getHeaders(char* filename, FILE* file){
 		exit(6);
 	}
 	//close the file.
-	fclose(file);
 	return returnValues;
 }
 

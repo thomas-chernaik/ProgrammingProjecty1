@@ -39,7 +39,7 @@ void writeFile(char* filename, unsigned char** fileToWrite, int width, int heigh
 	for(int i=0; i<height; i++){
 		for(int j=0; j<width; j++){
 			//we need to do the +0.5f and round down to avoid any unsigned charing point errors because we don't want those
-			numToPut = (int) (fileToWrite[i][j] * maxGrey)+0.5f;
+			numToPut = (int) fileToWrite[i][j];
 			sprintf(stringToPut, "%d", numToPut);
 			fputs(stringToPut, file);
 			lineLength += strlen(stringToPut);
