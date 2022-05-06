@@ -1,0 +1,234 @@
+pgmEcho file exists                                                              PASSED
+pgmEcho correct message for wrong # of parameters                                PASSED
+pgmEcho correct return code for wrong # of parameters                            PASSED
+pgmEcho correct return code with bad filename                                    PASSED
+pgmEcho correct error string with bad filename                                   PASSED
+pgmEcho correct return code for non-readable file                                PASSED
+pgmEcho correct error string for non-readable file                               PASSED
+pgmEcho correct return on bad magic number                                       FAILED
+pgmEcho correct error string on bad magic number                                 FAILED
+pgmEcho correct return on bad dimensions (-1)                                    PASSED
+pgmEcho correct error string on bad dimensions (-1)                              PASSED
+pgmEcho correct return on bad dimensions (65536)                                 PASSED
+pgmEcho correct error string on bad dimensions (65536)                           PASSED
+pgmEcho correct return on bad max gray value                                     PASSED
+pgmEcho correct error string on bad max gray value                               PASSED
+pgmEcho correct return on large comment                                          FAILED
+pgmEcho correct return on too much data                                          PASSED
+pgmEcho correct output string on too much data                                   PASSED
+pgmEcho correct return on too little data                                        PASSED
+pgmEcho correct output string on too little data                                 PASSED
+pgmEcho correct return on failed malloc                                          PASSED
+pgmEcho correct error string on failed malloc                                    PASSED
+pgmEcho correct usage message for no parameters                                  PASSED
+pgmEcho correct result code for no parameters                                    PASSED
+pgmEcho correct return on non-writeable file                                     PASSED
+pgmEcho correct error string on non-writeable file                               PASSED
+pgmEcho generates an identical ascii file                                        PASSED
+pgmEcho generates an identical binary file                                       PASSED
+pgmComp file exists                                                              PASSED
+pgmComp correct message for wrong # of parameters                                PASSED
+pgmComp correct return code for wrong # of parameters                            PASSED
+pgmComp correct return code with bad filename                                    PASSED
+pgmComp correct error string with bad filename                                   PASSED
+pgmComp correct return code for non-readable file                                PASSED
+pgmComp correct error string for non-readable file                               PASSED
+pgmComp correct return on bad magic number                                       FAILED
+pgmComp correct error string on bad magic number                                 FAILED
+pgmComp correct return on bad dimensions (-1)                                    FAILED
+pgmComp correct error string on bad dimensions (-1)                              FAILED
+pgmComp correct return on bad dimensions (65536)                                 FAILED
+pgmComp correct error string on bad dimensions (65536)                           FAILED
+pgmComp correct return on bad max gray value                                     FAILED
+pgmComp correct error string on bad max gray value                               FAILED
+pgmComp correct return on large comment                                          FAILED
+pgmComp correct return on too much data                                          FAILED
+pgmComp correct output string on too much data                                   FAILED
+pgmComp correct return on too little data                                        FAILED
+pgmComp correct output string on too little data                                 FAILED
+pgmComp correct return on failed malloc                                          FAILED
+pgmComp correct error string on failed malloc                                    FAILED
+pgmComp correct usage message for no parameters                                  PASSED
+pgmComp correct result code for no parameters                                    PASSED
+pgmComp successfully compares identical images                                   PASSED
+pgmComp successfully compares identical images                                   PASSED
+pgmComp successfully compares non-identical images                               PASSED
+pgmComp successfully compares non-identical images                               PASSED
+pgmComp successfully compares identical ascii -> binary images return code       PASSED
+pgmComp successfully compares identical ascii -> binary images                   PASSED
+pgmComp successfully compares non-identical ascii -> binary images return code   PASSED
+pgmComp successfully compares non-identical ascii -> binary images               PASSED
+pgma2b file exists                                                               PASSED
+pgma2b correct message for wrong # of parameters                                 PASSED
+pgma2b correct return code for wrong # of parameters                             PASSED
+pgma2b correct return code with bad filename                                     PASSED
+pgma2b correct error string with bad filename                                    PASSED
+pgma2b correct return code for non-readable file                                 PASSED
+pgma2b correct error string for non-readable file                                PASSED
+pgma2b correct return on bad magic number                                        FAILED
+pgma2b correct error string on bad magic number                                  FAILED
+pgma2b correct return on bad dimensions (-1)                                     PASSED
+pgma2b correct error string on bad dimensions (-1)                               PASSED
+pgma2b correct return on bad dimensions (65536)                                  PASSED
+pgma2b correct error string on bad dimensions (65536)                            PASSED
+pgma2b correct return on bad max gray value                                      PASSED
+pgma2b correct error string on bad max gray value                                PASSED
+pgma2b correct return on large comment                                           FAILED
+pgma2b correct return on too much data                                           PASSED
+pgma2b correct output string on too much data                                    PASSED
+pgma2b correct return on too little data                                         PASSED
+pgma2b correct output string on too little data                                  PASSED
+pgma2b correct return on failed malloc                                           PASSED
+pgma2b correct error string on failed malloc                                     PASSED
+pgma2b correct usage message for no parameters                                   PASSED
+pgma2b correct result code for no parameters                                     PASSED
+pgma2b check return code on success                                              PASSED
+pgma2b check output string on success                                            PASSED
+pgma2b correct return on non-writeable file                                      PASSED
+pgma2b correct error string on non-writeable file                                PASSED
+pgma2b check return code for binary input file                                   PASSED
+pgma2b check error string for binary input file                                  PASSED
+pgma2b successfully converts files                                               PASSED
+pgmb2a file exists                                                               PASSED
+pgmb2a correct message for wrong # of parameters                                 PASSED
+pgmb2a correct return code for wrong # of parameters                             PASSED
+pgmb2a correct return code with bad filename                                     PASSED
+pgmb2a correct error string with bad filename                                    PASSED
+pgmb2a correct return code for non-readable file                                 PASSED
+pgmb2a correct error string for non-readable file                                PASSED
+pgmb2a correct return on bad magic number                                        PASSED
+pgmb2a correct error string on bad magic number                                  PASSED
+pgmb2a correct return on bad dimensions (-1)                                     PASSED
+pgmb2a correct error string on bad dimensions (-1)                               PASSED
+pgmb2a correct return on bad dimensions (65536)                                  PASSED
+pgmb2a correct error string on bad dimensions (65536)                            PASSED
+pgmb2a correct return on bad max gray value                                      PASSED
+pgmb2a correct error string on bad max gray value                                PASSED
+pgmb2a correct return on large comment                                           FAILED
+pgmb2a correct return on too much data                                           FAILED
+pgmb2a correct output string on too much data                                    FAILED
+pgmb2a correct return on too little data                                         FAILED
+pgmb2a correct output string on too little data                                  FAILED
+pgmb2a correct return on failed malloc                                           FAILED
+pgmb2a correct error string on failed malloc                                     FAILED
+pgmb2a correct usage message for no parameters                                   PASSED
+pgmb2a correct result code for no parameters                                     PASSED
+pgmb2a correct return on non-writeable file                                      PASSED
+pgmb2a correct error string on non-writeable file                                PASSED
+pgmb2a check return code on success                                              PASSED
+pgmb2a check output string on success                                            PASSED
+pgmb2a check return code for ascii input file                                    PASSED
+pgmb2a check error string for ascii input file                                   PASSED
+pgmb2a successfully converts files                                               PASSED
+pgmReduce file exists                                                            PASSED
+pgmReduce correct usage message for no parameters                                PASSED
+pgmReduce correct result code for no parameters                                  PASSED
+pgmReduce correct error string for 1 parameter                                   PASSED
+pgmReduce correct result code for 1 parameter                                    PASSED
+pgmReduce correct error string for 2 parameters                                  PASSED
+pgmReduce correct result code for 2 parameters                                   PASSED
+pgmReduce correct output string for non-numeric scaling factor                   PASSED
+pgmReduce correct return code for non-numeric scaling fractor                    PASSED
+pgmReduce correct output string for negative scaling factor                      PASSED
+pgmReduce correct return code for negative scaling fractor                       PASSED
+pgmReduce correct output string for non-readable file                            PASSED
+pgmReduce correct return code for non-readable file                              PASSED
+pgmReduce correct output string for bad magic number                             FAILED
+pgmReduce correct return code for bad magic number                               FAILED
+pgmReduce correct output string for bad comment                                  FAILED
+pgmReduce correct output string for bad dimensions                               PASSED
+pgmReduce correct return code for bad dimensions                                 PASSED
+pgmReduce correct output string for bad gray                                     PASSED
+pgmReduce correct return code for bad gray                                       PASSED
+pgmReduce correct return on too much data                                        PASSED
+pgmReduce correct output string on too much data                                 PASSED
+pgmReduce correct return on too little data                                      PASSED
+pgmReduce correct output string on too little data                               PASSED
+pgmReduce correct return on failed malloc                                        FAILED
+pgmReduce correct error string on failed malloc                                  FAILED
+pgmReduce correct return on non-writeable file                                   FAILED
+pgmReduce correct error string on non-writeable file                             FAILED
+pgmReduce correct output string for good downsampling                            PASSED
+pgmReduce correct return code for good downsampling                              PASSED
+pgmReduce successfully downsampling comparison                                   PASSED
+pgmTile file exists                                                              PASSED
+pgmTile correct usage message for no parameters                                  PASSED
+pgmTile correct result code for no parameters                                    PASSED
+pgmTile correct error string for 1 parameter                                     PASSED
+pgmTile correct result code for 1 parameter                                      PASSED
+pgmTile correct error string for 2 parameters                                    PASSED
+pgmTile correct result code for 2 parameters                                     PASSED
+pgmTile correct error string for bad template                                    PASSED
+pgmTile correct result code for bad template                                     PASSED
+pgmTile correct output string for missing input file                             PASSED
+pgmTile correct result code for missing input file                               PASSED
+pgmTile correct output string for non-readable file                              PASSED
+pgmTile correct return code for non-readable file                                PASSED
+pgmTile correct output string for bad magic number                               FAILED
+pgmTile correct return code for bad magic number                                 FAILED
+pgmTile correct output string for bad comment                                    FAILED
+pgmTile correct output string for bad dimensions                                 PASSED
+pgmTile correct return code for bad dimensions                                   PASSED
+pgmTile correct output string for bad gray                                       PASSED
+pgmTile correct return code for bad gray                                         PASSED
+pgmTile correct return on too much data                                          PASSED
+pgmTile correct output string on too much data                                   PASSED
+pgmTile correct return on too little data                                        PASSED
+pgmTile correct output string on too little data                                 PASSED
+pgmTile correct return on failed malloc                                          PASSED
+pgmTile correct error string on failed malloc                                    PASSED
+pgmTile correct return on non-writeable file                                     FAILED
+pgmTile correct error string on non-writeable file                               FAILED
+pgmTile correct output string for good template                                  PASSED
+pgmTile correct result code for good template                                    PASSED
+pgmTile successfully tile comparison 0 0 at factor 2                             PASSED
+pgmTile successfully tile comparison 0 1 at factor 2                             PASSED
+pgmTile successfully tile comparison 1 0 at factor 2                             PASSED
+pgmTile successfully tile comparison 1 1 at factor 2                             PASSED
+pgmTile correct output string for good template                                  PASSED
+pgmTile correct result code for good template                                    PASSED
+pgmTile successfully tile comparison 0 0 at factor 3                             PASSED
+pgmTile successfully tile comparison 0 1 at factor 3                             PASSED
+pgmTile successfully tile comparison 0 2 at factor 3                             PASSED
+pgmTile successfully tile comparison 1 0 at factor 3                             PASSED
+pgmTile successfully tile comparison 1 1 at factor 3                             PASSED
+pgmTile successfully tile comparison 1 2 at factor 3                             PASSED
+pgmTile successfully tile comparison 2 0 at factor 3                             PASSED
+pgmTile successfully tile comparison 2 1 at factor 3                             PASSED
+pgmTile successfully tile comparison 2 2 at factor 3                             PASSED
+pgmTile correct output string for good template                                  PASSED
+pgmTile correct result code for good template                                    PASSED
+pgmTile successfully tile comparison 0 0 at factor 4                             PASSED
+pgmTile successfully tile comparison 0 1 at factor 4                             PASSED
+pgmTile successfully tile comparison 0 2 at factor 4                             PASSED
+pgmTile successfully tile comparison 0 3 at factor 4                             PASSED
+pgmTile successfully tile comparison 1 0 at factor 4                             PASSED
+pgmTile successfully tile comparison 1 1 at factor 4                             PASSED
+pgmTile successfully tile comparison 1 2 at factor 4                             PASSED
+pgmTile successfully tile comparison 1 3 at factor 4                             PASSED
+pgmTile successfully tile comparison 2 0 at factor 4                             PASSED
+pgmTile successfully tile comparison 2 1 at factor 4                             PASSED
+pgmTile successfully tile comparison 2 2 at factor 4                             PASSED
+pgmTile successfully tile comparison 2 3 at factor 4                             PASSED
+pgmTile successfully tile comparison 3 0 at factor 4                             PASSED
+pgmTile successfully tile comparison 3 1 at factor 4                             PASSED
+pgmTile successfully tile comparison 3 2 at factor 4                             PASSED
+pgmTile successfully tile comparison 3 3 at factor 4                             PASSED
+pgmAssemble file exists                                                          PASSED
+pgmAssemble correct usage message for no parameters                              PASSED
+pgmAssemble correct result code for no parameters                                PASSED
+pgmAssemble correct error message for bad parameter count                        PASSED
+pgmAssemble correct result code for bad parameter count                          PASSED
+pgmAssemble correct message for non-existent file                                PASSED
+pgmAssemble correct result code for non-existent file                            PASSED
+pgmAssemble correct message for non-readable files                               PASSED
+pgmAssemble correct result code for non-readable files                           PASSED
+pgmAssemble correct message for non-readable files                               PASSED
+pgmAssemble correct result code for non-readable files                           PASSED
+pgmAssemble correct result code for successful assemble (ukmap) return code      PASSED
+pgmAssemble correct result code for successful assemble (ukmap) return message   PASSED
+pgmAssemble successfully assemble comparison                                     PASSED
+pgmAssemble successfully assemble comparison 2x2 return code                     PASSED
+pgmAssemble successfully assemble comparison 2x2 return message                  PASSED
+pgmAssemble successfully assemble comparison 3x3 return code                     PASSED
+pgmAssemble successfully assemble comparison 3x3 return message                  PASSED

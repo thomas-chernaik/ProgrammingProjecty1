@@ -5,6 +5,7 @@
  */
 
 #include <stdio.h>
+#include <string.h>
 #include <stdlib.h>
 #include "pgmHeaders.h"
 
@@ -72,7 +73,7 @@ void skipCommenth(FILE* file){
 	//check if the first character on the line is a #
 	if(*chr == '#'){
 		//read to the end of the line
-		fgets(str, 90, file);
+		fgets(str, 127, file);
 	}
 	else{
 		//go back one byte in the file because that wasn't a comment

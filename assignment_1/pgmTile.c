@@ -56,8 +56,17 @@ int main(int argc, char **argv){
 		printf("ERROR: Bad Argument Count\n");
 		return 1;
 	}
-	char rowcolcmp[] = {'_', '<', 'r', 'o', 'w', '>'};
+	//create a variable with our format string in
+	char rowcolcmp[] = {'_', '<', 'r', 'o', 'w', '>', '_', '<','c','o','l','\0'};
+	//find where this string is in our template
         char* row_col = strstr(argv[3], rowcolcmp);
+	//check it existed 
+	if(row_col == NULL)
+		{
+		//print error
+		printf("ERROR: Miscellaneous (bad template)\n");
+		return 100;
+		}
         *row_col = '\0';
 	//open the file
 	FILE* file = openFile(argv[1]);
