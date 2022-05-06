@@ -30,12 +30,14 @@ int main(int argc, char **argv){
 		//if ascii read and write the ascii file.
 		unsigned char** imageData = readFile(file, argv[1], headers[0], headers[1]);
 		writeFile(argv[2], imageData, headers[0], headers[1], headers[2]);
+		free(imageData[0]);
 		free(imageData);
 	}
 	else{
 		//else its binary so read and write the binary file
 		unsigned char** imageData = readFileBin(file, argv[1], headers[0], headers[1]);
 		writeBin(argv[2], imageData, headers[0], headers[1], headers[2]);
+		free(imageData[0]);
 		free(imageData);
 	
 	}

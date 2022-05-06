@@ -119,6 +119,7 @@ int main(int argc, char **argv){
 		}
 	}
 	free(headers);
+	free(imageData[0]);
 	free(imageData);
 	printf("TILED\n");
 	return 0;

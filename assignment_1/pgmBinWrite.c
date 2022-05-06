@@ -28,4 +28,6 @@ void writeBin(char* filename, unsigned char** fileToWrite, int width, int height
 			fwrite(&fileToWrite[i][j], sizeof(unsigned char), 1, file);
 		}
 	}
+	free(headers);
+	fclose(file);
 }

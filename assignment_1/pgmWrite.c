@@ -55,4 +55,6 @@ void writeFile(char* filename, unsigned char** fileToWrite, int width, int heigh
 		}
 	}
 	fclose(file);
+	free(stringToPut);
+	//free(fileToWrite[0]);
 }

@@ -7,6 +7,8 @@
 //downize the image data in file by factor factor
 unsigned char** reduceSize(unsigned char** file, int oldwidth, int oldheight, int factor){
 	//work out the new width and length
+	//I'm not really sure why we add 2 to both of them but it works?
+	//I thought I should only add 1 to it because of indexing from 0 but apparently 2 is needed.
 	int width = 2+oldwidth / factor;
 	int height = 2+oldheight / factor ;
 	//initialise the new width

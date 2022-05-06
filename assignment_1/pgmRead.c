@@ -73,9 +73,11 @@ unsigned char** readFile(FILE* file, char* filename, int width, int height){
 	if(*c != EOF){
 		free(rowsOfImageData);
                 fclose(file);
+		free(c);
                 printf("ERROR: Bad Data (%s)", filename);
                 exit(8);
 	}
+	free(c);
 	fclose(file);
 	return rowsOfImageData;
 }

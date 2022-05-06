@@ -60,6 +60,7 @@ int main(int argc, char **argv){
 		//add the file data to the big file in the right place
 		insert(fileToInsert, imageData, row, col, width, height, headers[0], headers[1]);
 		free(headers);
+		free(fileToInsert[0]);
 		free(fileToInsert);
 	}
 	//write out the big file
@@ -69,6 +70,10 @@ int main(int argc, char **argv){
 	else{
 		writeBin(filename, imageData, width, height, maxGrey);
 	}
+	for(int i=0; i<height; i++)
+		{
+		free(imageData[i]);
+		}
 	free(imageData);
 	printf("ASSEMBLED\n");
 	return 0;

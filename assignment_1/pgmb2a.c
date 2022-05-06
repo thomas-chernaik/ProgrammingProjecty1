@@ -32,6 +32,7 @@ int main(int argc, char **argv){
 	unsigned char** imageData = readFileBin(file, argv[1], headers[0], headers[1]);
 	//write out the file data to a pgm ascii file
 	writeFile(argv[2], imageData, headers[0], headers[1], headers[2]);
+	free(imageData[0]);
         free(imageData);
         free(headers);
         printf("CONVERTED\n");

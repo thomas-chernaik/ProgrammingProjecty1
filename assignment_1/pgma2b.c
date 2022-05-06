@@ -31,6 +31,13 @@ int main(int argc, char **argv){
         unsigned char** imageData = readFile(file, argv[1], headers[0], headers[1]);
 	//write out the array to a pgmbinary file
         writeBin(argv[2], imageData, headers[0], headers[1], headers[2]);
+	//free each row of data
+	/*
+	for(int i=0; i<headers[0]; i++)
+		{
+		free(&imageData[i]);
+		}*/
+	free(imageData[0]);
 	free(imageData);
 	free(headers);
 	printf("CONVERTED\n");
