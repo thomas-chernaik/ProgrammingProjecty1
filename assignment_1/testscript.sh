@@ -44,3 +44,4 @@ rm images/testout_*
 echo "assembling a tiled file and comparing it to the original file"
 ./pgmAssemble images/testAssemble.pgm 2 2 0 0 images/test_0_0.pgm 0 1 images/test_0_1.pgm 1 0 images/test_1_0.pgm 1 1 images/test_1_1.pgm
 ./pgmComp images/testAssemble.pgm images/testfile1.pgm
+make clean

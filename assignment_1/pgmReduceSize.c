@@ -3,14 +3,13 @@
  */
 #include <stdio.h>
 #include <stdlib.h>
-#include "pgmReduceSize.h"
+#include <math.h>
+
 //downize the image data in file by factor factor
 unsigned char** reduceSize(unsigned char** file, int oldwidth, int oldheight, int factor){
 	//work out the new width and length
-	//I'm not really sure why we add 2 to both of them but it works?
-	//I thought I should only add 1 to it because of indexing from 0 but apparently 2 is needed.
-	int width = 2+oldwidth / factor;
-	int height = 2+oldheight / factor ;
+	int width = 1+(oldwidth / factor);
+	int height = 1+(oldheight / factor);
 	//initialise the new width
 	unsigned char** newFile = (unsigned char**) malloc(sizeof(unsigned char*) * height);
 	for(int i=0; i<height; i++){
@@ -21,7 +20,6 @@ unsigned char** reduceSize(unsigned char** file, int oldwidth, int oldheight, in
 	//go through the image data
 	for(int i=0; i<oldheight; i++){
 		if((i)%factor == 0){
-			pixelIndexi++;
 			pixelIndexj = 0;
 			for(int j=0; j<oldwidth; j++){
 			
@@ -31,6 +29,7 @@ unsigned char** reduceSize(unsigned char** file, int oldwidth, int oldheight, in
 					newFile[pixelIndexi][pixelIndexj++] = file[i][j];
 				}
 			}
+			pixelIndexi++;
 		}
 	}
 	return newFile;

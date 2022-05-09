@@ -1,6 +1,6 @@
 #define macros for compiler and flags
 CC= gcc
-CFLAGS = -g -std=c99
+CFLAGS = -g -std=c99 -Wall
 
 SRCECHO= pgmHeaders.c pgmRead.c pgmWrite.c pgmBinWrite.c pgmReadBinary.c
 SRCTILE = pgmHeaders.c pgmRead.c pgmWrite.c pgmBinWrite.c pgmReadBinary.c pgmSubImage.c
@@ -37,7 +37,7 @@ pgmb2a: pgmb2a.c $(OBJB2A)
 	$(CC) $(CFLAGS) pgmb2a.c $(OBJB2A) -o pgmb2a
 
 pgmReduce: pgmReduce.c $(OBJREDUCE)
-	$(CC) $(CFLAGS) pgmReduce.c $(OBJREDUCE) -o pgmReduce
+	$(CC) $(CFLAGS) pgmReduce.c $(OBJREDUCE) -o pgmReduce 
 
 pgmTile: pgmTile.c $(OBJTILE)
 	$(CC) $(CFLAGS) pgmTile.c $(OBJTILE) -o pgmTile	
@@ -60,7 +60,7 @@ pgmCompare.o: pgmCompare.c pgmCompare.h
 pgmReduceSize.o: pgmReduceSize.c pgmReduceSize.h
 	$(CC) $(CFLAGS) -c pgmReduceSize.c pgmReduceSize.h
 pgmSubImage.o: pgmSubImage.c pgmSubImage.h
-	$(CC) $(CFLAGS) -c pgmSubImage.c pgmSubImage.h
+	$(CC) $(CFLAGS) -c pgmSubImage.c pgmSubImage.h 
 pgmEmpty.o: pgmEmpty.c pgmEmpty.h
 	$(CC) $(CFLAGS) -c pgmEmpty.c pgmEmpty.h
 pgmInsert.o: pgmInsert.c pgmInsert.h

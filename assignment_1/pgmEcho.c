@@ -21,15 +21,19 @@ int main(int argc, char **argv){
 		printf("ERROR: Bad Argument Count\n");
 		return 1;
 	}
+	//open the file
 	FILE* file = openFile(argv[1]);
+	//init headers
 	int* headers;
 	//headers[0] is width, [1] is height, [2] is maxGrey [3] is magic num
+	//read the headers
 	headers = getHeaders(argv[1], file);
 	//check if binary or ascii
 	if (headers[3] == 2){	
 		//if ascii read and write the ascii file.
 		unsigned char** imageData = readFile(file, argv[1], headers[0], headers[1]);
 		writeFile(argv[2], imageData, headers[0], headers[1], headers[2]);
+		//free memory
 		free(imageData[0]);
 		free(imageData);
 	}
@@ -37,6 +41,7 @@ int main(int argc, char **argv){
 		//else its binary so read and write the binary file
 		unsigned char** imageData = readFileBin(file, argv[1], headers[0], headers[1]);
 		writeBin(argv[2], imageData, headers[0], headers[1], headers[2]);
+		//free memory
 		free(imageData[0]);
 		free(imageData);
 	

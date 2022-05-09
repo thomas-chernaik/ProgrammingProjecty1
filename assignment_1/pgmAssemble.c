@@ -32,44 +32,59 @@ int main(int argc, char **argv){
 		return 1;
 	}
 	//put the command line args into variables for formatting
+	//convert the width and height to ints from strings
 	int width = atoi(argv[2]);
 	int height = atoi(argv[3]);
+	//set default values for maxGrey and type
 	int maxGrey = 255;
 	int type = 2;
+	//set a pointer to the filename with a readable name
 	char* filename = argv[1];
 	//create the image to paste the other images onto
 	unsigned char** imageData = createEmpty(width, height);
 	//now we have to loop through all the different images to put on it
 	for(int i=1; i < (argc-1)/3; i++){
+		//get the row number and header number from the argv
 		int row = atoi(argv[i*3+1]);
 		int col = atoi(argv[i*3+2]);
+		//get the format string from the argv
 		char* fileNamei = argv[i*3+3];
 		//open the file
+		//init headers and fileToInsert
 		int* headers;
 		unsigned char** fileToInsert;
+		//open the file
 		FILE* file = openFile(fileNamei);
+		//get the headers for the file
 		headers = getHeaders(fileNamei, file);
+		//store the type of this file in type
 		type = headers[3];
 		//read the file in
+		//if ascii read as ascii
 		if(headers[3] == 2){
 			fileToInsert = readFile(file, fileNamei, headers[0], headers[1]);
 		}
+		//otherwise read as bin
 		else{
 			fileToInsert = readFileBin(file, fileNamei, headers[0], headers[1]);
 		}
 		//add the file data to the big file in the right place
 		insert(fileToInsert, imageData, row, col, width, height, headers[0], headers[1]);
+		//free memory
 		free(headers);
 		free(fileToInsert[0]);
 		free(fileToInsert);
 	}
 	//write out the big file
+	//if the last type was ascii write as ascii
 	if(type == 2){
 		writeFile(filename, imageData, width, height, maxGrey);
 	}
+	//otherwise write as bin
 	else{
 		writeBin(filename, imageData, width, height, maxGrey);
 	}
+	//free the image data row by row
 	for(int i=0; i<height; i++)
 		{
 		free(imageData[i]);

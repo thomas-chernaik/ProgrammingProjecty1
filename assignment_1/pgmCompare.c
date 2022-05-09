@@ -10,8 +10,10 @@
 
 //compares two unsigned char arrays of length widthlength and checks they are identical
 int compareContents(unsigned char** file1, unsigned char** file2, int width, int height){
+	//go through each pixel by width and height
 	for(int i=0; i<width; i++){
 		for(int j=0; j<height; j++){
+			//check if the corresponding pixels from the two files match
 			if(file1[j][i] != file2[j][i]){
 				return 0;
 			}

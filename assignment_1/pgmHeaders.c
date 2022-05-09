@@ -11,33 +11,40 @@
 
 //open a file
 FILE* openFile(char* filename){
+	//init file pointer
 	FILE* file;
+	//open the file
 	file = fopen(filename, "r");
         //validate the file opened
         if(file == NULL){
                 printf("ERROR: Bad File Name (%s)\n", filename);
                 exit(2);
 	}
+	return file;
 }
-
+FILE* other = NULL;
 //gets the headers from a pgm file
 int* getHeaders(char* filename, FILE* file){
 	//first value is the width, second length, third the maximum grey value, fourth the magic number .
 	int* returnValues = (int*) malloc(5 * sizeof(int));
 	//clear the P from the magic number
-	fgetc(file);
+	char *c = malloc(sizeof(char));
+	*c = fgetc(file);
 	skipCommenth(file, filename);
 	//read the magic number it should be the next value in the file
 	fscanf(file, "%d", &returnValues[3]);
 	skipCommenth(file, filename);
 	//check the magic number is valid
-	if(!(returnValues[3] == 2 || returnValues[3] == 5) || &returnValues[3] == NULL){
+	if(!(returnValues[3] == 2 || returnValues[3] == 5) || &returnValues[3] == NULL || *c != 'P'){
 		fclose(file);
+		if(other != NULL)
+			fclose(other);
+		free(c);
 		printf("ERROR: Bad Magic Number (%s)\n", filename);
 		exit(3);
 	
 	}
-	int num=0;
+	free(c);
 	//read in the width height and maxgrey values
 	fscanf(file, " %d", &returnValues[0]);
 	skipCommenth(file, filename);

@@ -8,8 +8,8 @@
 #include <stdlib.h>
 #include "pgmRead.h"
 
-
-
+FILE* otherRead = NULL;
+unsigned char** otherIm = NULL;
 //read in the file filename with the provided header data to a unsigned char array
 unsigned char** readFile(FILE* file, char* filename, int width, int height){
 	//initialise and malloc our needed variables
@@ -23,6 +23,14 @@ unsigned char** readFile(FILE* file, char* filename, int width, int height){
 	//1d. check whether it didn't work
 	if(imageData == NULL)
 		{
+		fclose(file);
+		if(otherIm != NULL)
+			{
+			free(otherIm[0]);
+			free(otherIm);
+			}
+		if(otherRead != NULL)
+			fclose(otherRead);
 		printf("ERROR: Image Malloc Failed\n");
                 exit(7);
 		}
@@ -36,6 +44,15 @@ unsigned char** readFile(FILE* file, char* filename, int width, int height){
 	//2d. check it worked
 	if(rowsOfImageData == NULL)
 		{
+			fclose(file);
+			if(otherIm != NULL)
+				{
+				free(otherIm[0]);
+				free(otherIm);
+				}
+			if(otherRead != NULL)
+	                        fclose(otherRead);
+
 			printf("ERROR: Image Malloc Failed\n");
 	                exit(7);
 		}
@@ -54,11 +71,18 @@ unsigned char** readFile(FILE* file, char* filename, int width, int height){
 	for(int i=0; i<height; i++){
 		for(int j=0; j<width; j++){
 			//read the data for this pixel
-			int scanCount = fscanf(file, "%d", &rowsOfImageData[i][j]);
+			int scanCount = fscanf(file, "%hhu", &rowsOfImageData[i][j]);
 			//check stuff was read
 			if((rowsOfImageData[i][j] == EOF || scanCount != 1) || (rowsOfImageData[i][j] < 0) || (rowsOfImageData[i][j] > 255)){
 				free(rowsOfImageData);
 				fclose(file);
+				if(otherIm != NULL)
+					{
+					free(otherIm[0]);
+					free(otherIm);
+					}	
+				if(otherRead != NULL)
+		                        fclose(otherRead);
 				printf("ERROR: Bad Data (%s)", filename);
 				exit(8);
 			}
@@ -67,13 +91,21 @@ unsigned char** readFile(FILE* file, char* filename, int width, int height){
 	//check we are at the end of the file
 	int* c = malloc(sizeof(int));
 	//scan out any whitespace at the end of the file
-	fscanf(file, " ", c);
-	//check we are at the EOF character
+	fscanf(file, " ");
+	//get next character
 	*c = getc(file);
+	//check we are at the EOF character
 	if(*c != EOF){
 		free(rowsOfImageData);
                 fclose(file);
 		free(c);
+		if(otherIm != NULL)
+			{
+			free(otherIm[0]);
+			free(otherIm);
+			}
+		if(otherRead != NULL)
+                        fclose(otherRead);
                 printf("ERROR: Bad Data (%s)", filename);
                 exit(8);
 	}

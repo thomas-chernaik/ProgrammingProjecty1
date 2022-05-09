@@ -1,34 +1,38 @@
-pgmEcho correct return on bad magic number                                       FAILED
-pgmEcho correct error string on bad magic number                                 FAILED
-pgmComp correct return on bad magic number                                       FAILED
-pgmComp correct error string on bad magic number                                 FAILED
-pgmComp correct return on bad dimensions (-1)                                    FAILED
-pgmComp correct error string on bad dimensions (-1)                              FAILED
-pgmComp correct return on bad dimensions (65536)                                 FAILED
-pgmComp correct error string on bad dimensions (65536)                           FAILED
-pgmComp correct return on bad max gray value                                     FAILED
-pgmComp correct error string on bad max gray value                               FAILED
 pgmComp correct return on too much data                                          FAILED
 pgmComp correct output string on too much data                                   FAILED
 pgmComp correct return on too little data                                        FAILED
 pgmComp correct output string on too little data                                 FAILED
 pgmComp correct return on failed malloc                                          FAILED
 pgmComp correct error string on failed malloc                                    FAILED
-pgma2b correct return on bad magic number                                        FAILED
-pgma2b correct error string on bad magic number                                  FAILED
-pgmb2a correct return on too much data                                           FAILED
-pgmb2a correct output string on too much data                                    FAILED
-pgmb2a correct return on too little data                                         FAILED
-pgmb2a correct output string on too little data                                  FAILED
-pgmb2a correct return on failed malloc                                           FAILED
-pgmb2a correct error string on failed malloc                                     FAILED
-pgmReduce correct output string for bad magic number                             FAILED
-pgmReduce correct return code for bad magic number                               FAILED
-pgmReduce correct return on failed malloc                                        FAILED
-pgmReduce correct error string on failed malloc                                  FAILED
-pgmReduce correct return on non-writeable file                                   FAILED
-pgmReduce correct error string on non-writeable file                             FAILED
-pgmTile correct output string for bad magic number                               FAILED
-pgmTile correct return code for bad magic number                                 FAILED
+pgmReduce successfully downsampling comparison                                   FAILED
 pgmTile correct return on non-writeable file                                     FAILED
 pgmTile correct error string on non-writeable file                               FAILED
+pgmTile successfully tile comparison 0 0 at factor 2                             FAILED
+pgmTile successfully tile comparison 0 1 at factor 2                             FAILED
+pgmTile successfully tile comparison 1 0 at factor 2                             FAILED
+pgmTile successfully tile comparison 1 1 at factor 2                             FAILED
+pgmTile successfully tile comparison 0 0 at factor 3                             FAILED
+pgmTile successfully tile comparison 0 1 at factor 3                             FAILED
+pgmTile successfully tile comparison 0 2 at factor 3                             FAILED
+pgmTile successfully tile comparison 1 0 at factor 3                             FAILED
+pgmTile successfully tile comparison 1 1 at factor 3                             FAILED
+pgmTile successfully tile comparison 1 2 at factor 3                             FAILED
+pgmTile successfully tile comparison 2 0 at factor 3                             FAILED
+pgmTile successfully tile comparison 2 1 at factor 3                             FAILED
+pgmTile successfully tile comparison 2 2 at factor 3                             FAILED
+pgmTile successfully tile comparison 0 0 at factor 4                             FAILED
+pgmTile successfully tile comparison 0 1 at factor 4                             FAILED
+pgmTile successfully tile comparison 0 2 at factor 4                             FAILED
+pgmTile successfully tile comparison 0 3 at factor 4                             FAILED
+pgmTile successfully tile comparison 1 0 at factor 4                             FAILED
+pgmTile successfully tile comparison 1 1 at factor 4                             FAILED
+pgmTile successfully tile comparison 1 2 at factor 4                             FAILED
+pgmTile successfully tile comparison 1 3 at factor 4                             FAILED
+pgmTile successfully tile comparison 2 0 at factor 4                             FAILED
+pgmTile successfully tile comparison 2 1 at factor 4                             FAILED
+pgmTile successfully tile comparison 2 2 at factor 4                             FAILED
+pgmTile successfully tile comparison 2 3 at factor 4                             FAILED
+pgmTile successfully tile comparison 3 0 at factor 4                             FAILED
+pgmTile successfully tile comparison 3 1 at factor 4                             FAILED
+pgmTile successfully tile comparison 3 2 at factor 4                             FAILED
+pgmTile successfully tile comparison 3 3 at factor 4                             FAILED
