@@ -19,10 +19,13 @@ int main(int argc, char **argv){
                 printf("ERROR: Bad Argument Count\n");
                 return 1;
         }
+	//open the two files
 	FILE* file1 = openFile(argv[1]);
 	FILE* file2 = openFile(argv[2]);
+	//initialise the header pointers
 	int* headers1;
 	int* headers2;
+	//get the headers and store them where the pointers point
 	headers1 = getHeaders(argv[1], file1);
 	headers2 = getHeaders(argv[2], file2);
 	//check headers match
@@ -34,6 +37,7 @@ int main(int argc, char **argv){
 		printf("DIFFERENT\n");
 		return 0;
 	}
+	//intialise the imageData arrays
 	unsigned char** imageData1;
 	unsigned char** imageData2;
 	//read in the file data of both files
@@ -51,6 +55,8 @@ int main(int argc, char **argv){
         }
 	//compare contents of the files 
 	result = compareContents(imageData1, imageData2, headers2[0], headers2[1]);
+	free(imageData1[0]);
+	free(imageData2[0]);
 	free(imageData1);
 	free(imageData2);
 	free(headers1);

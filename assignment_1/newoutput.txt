@@ -231,4 +231,4 @@ pgmAssemble successfully assemble comparison                                    
 pgmAssemble successfully assemble comparison 2x2 return code                     PASSED
 pgmAssemble successfully assemble comparison 2x2 return message                  PASSED
 pgmAssemble successfully assemble comparison 3x3 return code                     PASSED
-pgmAssemble successfully assemble comparison 3x3 return message                  PASSED     
+pgmAssemble successfully assemble comparison 3x3 return message                  PASSED  
