@@ -1,4 +1,4 @@
-/*FILENAME: pgmRead.c
+/*FILENAME: gtopoRead.c
  *FUNCTIONS:
  *	readFile
  *	skipComment
@@ -6,7 +6,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include "pgmRead.h"
+#include "gtopoRead.h"
 
 FILE* otherRead = NULL;
 short** otherIm = NULL;

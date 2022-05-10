@@ -1,52 +1,30 @@
-/*FILENAME: pgmEcho.c
+/*FILENAME: gtopoEcho.c
  *DESCRIPTION: 
- *	clone a pgmfile into another file 
+ *	clone a gtopofile into another file 
  *	with comprehension of the file structure
 */
 
 #include <stdio.h>
 #include <stdlib.h>
-#include "pgmHeaders.h"
-#include "pgmRead.h"
-#include "pgmWrite.h"
-#include "pgmReadBinary.h"
-#include "pgmBinWrite.h"
+#include "gtopoRead.h"
+#include "gtopoWrite.h"
 int main(int argc, char **argv){
 	//validate the argument count
 	if(argc == 1){
-		printf("Usage: ./pgmEcho inputImage.pgm outputImage.pgm\n");
+		printf("Usage: ./gtopoEcho inputFile width height outputFile\n");
 		return 0;
 	}
-	if(argc != 3){
+	if(argc != 5){
 		printf("ERROR: Bad Argument Count\n");
 		return 1;
 	}
-	//open the file
-	FILE* file = openFile(argv[1]);
-	//init headers
-	int* headers;
-	//headers[0] is width, [1] is height, [2] is maxGrey [3] is magic num
-	//read the headers
-	headers = getHeaders(argv[1], file);
-	//check if binary or ascii
-	if (headers[3] == 2){	
-		//if ascii read and write the ascii file.
-		short** imageData = readFile(file, argv[1], headers[0], headers[1]);
-		writeFile(argv[2], imageData, headers[0], headers[1], headers[2]);
-		//free memory
-		free(imageData[0]);
-		free(imageData);
-	}
-	else{
-		//else its binary so read and write the binary file
-		short** imageData = readFileBin(file, argv[1], headers[0], headers[1]);
-		writeBin(argv[2], imageData, headers[0], headers[1], headers[2]);
-		//free memory
-		free(imageData[0]);
-		free(imageData);
-	
-	}
-	free(headers);
+	int width = atoi(argv[2]);
+	int height = atoi(argv[3]);
+	short** imageData = readFile(argv[1], width, height);
+	writeFile(argv[4], imageData, width, height);
+	//free memory
+	free(imageData[0]);
+	free(imageData);
 	printf("ECHOED\n");
 	return 0;	
 }

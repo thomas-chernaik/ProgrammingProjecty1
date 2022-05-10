@@ -1,4 +1,4 @@
-/*FILENAME: pgmCompare.c
+/*FILENAME: gtopoCompare.c
  *FUNCTIONS:
  *	compareContents
  *	compareHeaders
@@ -6,7 +6,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include "pgmCompare.h"
+#include "gtopoCompare.h"
 
 //compares two short arrays of length widthlength and checks they are identical
 int compareContents(short** file1, short** file2, int width, int height){

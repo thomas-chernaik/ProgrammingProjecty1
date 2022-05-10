@@ -1,4 +1,4 @@
-/*FILENAME: pgmReduceSize.c
+/*FILENAME: gtopoReduceSize.c
  *FUNCTIONS: reduceSize
  */
 #include <stdio.h>

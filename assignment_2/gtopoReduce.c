@@ -1,22 +1,19 @@
-/*FILENAME: pgmReduce.c
+/*FILENAME: gtopoReduce.c
  *DESCRIPTION:
- *	take in a pgm file and a factor to reduce it by and output
+ *	take in a gtopo file and a factor to reduce it by and output
  *	a reduced file.
  */
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "pgmRead.h"
-#include "pgmReadBinary.h"
-#include "pgmWrite.h"
-#include "pgmBinWrite.h"
-#include "pgmHeaders.h"
-#include "pgmReduceSize.h"
+#include "gtopoRead.h"
+#include "gtopoWrite.h"
+#include "gtopoReduceSize.h"
 
 int main(int argc, char** argv){
 	//validate the number of arguments
 	if(argc == 1){
-		printf("Usage: ./pgmReduce inputImage.pgm reduction_factor outputImage.pgm\n");
+		printf("Usage: ./gtopoReduce inputImage.gtopo reduction_factor outputImage.gtopo\n");
 		return 0;
 	}
 	if(argc != 4){

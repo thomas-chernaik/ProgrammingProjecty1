@@ -1,4 +1,4 @@
-/*FILENAME: pgmTile.c
+/*FILENAME: gtopoTile.c
  *FUNCTONS:
  *	insertRowAndColToString
  *DESCRIPTION:
@@ -13,12 +13,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "pgmHeaders.h"
-#include "pgmRead.h"
-#include "pgmWrite.h"
-#include "pgmReadBinary.h"
-#include "pgmBinWrite.h"
-#include "pgmSubImage.h"
+#include "gtopoRead.h"
+#include "gtopoWrite.h"
+#include "gtopoSubImage.h"
 
 //make the filename to write the tile to 
 //from the format string, the row and the column.
@@ -40,7 +37,7 @@ char* insertRowAndColToString(char* formatString, int rowint, int colint){
 	strcat(outString, row);
 	strcat(outString, "_");
 	strcat(outString, col);
-	strcat(outString, ".pgm");
+	strcat(outString, ".gtopo");
 	free(row);
 	free(col);
 	return outString;
@@ -49,7 +46,7 @@ char* insertRowAndColToString(char* formatString, int rowint, int colint){
 int main(int argc, char **argv){
 	//validate argument count
 	if(argc == 1){
-		printf("Usage: ./pgmTile inputImage.pgm tiling_factor outputImage_<row>_<column>.pgm\n");
+		printf("Usage: ./gtopoTile inputImage.gtopo tiling_factor outputImage_<row>_<column>.gtopo\n");
 		return 0;
 	}
 	if(argc != 4){

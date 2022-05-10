@@ -1,13 +1,11 @@
-/*FILENAME: pgmComp.c
+/*FILENAME: gtopoComp.c
  *DESCRIPTION:
  *	take in two file names and output if they are 
  *	logically identical
  */
 #include <stdlib.h>
-#include "pgmHeaders.h"
-#include "pgmRead.h"
-#include "pgmReadBinary.h"
-#include "pgmCompare.h"
+#include "gtopoRead.h"
+#include "gtopoCompare.h"
 
 FILE* other;
 FILE* otherRead;
@@ -17,10 +15,10 @@ short** otherIm;
 int main(int argc, char **argv){
 	//validate argument count
 	if(argc == 1){
-                printf("Usage: ./pgmComp inputImage.pgm inputImage.pgm\n");
+                printf("Usage: ./gtopoComp firstFile width height secondFile\n");
                 return 0;
         }
-        if(argc != 3){
+        if(argc != 5){
                 printf("ERROR: Bad Argument Count\n");
                 return 1;
         }

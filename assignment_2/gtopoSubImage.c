@@ -1,10 +1,10 @@
-/*FILENAME: pgmSubImage.c
+/*FILENAME: gtopoSubImage.c
  *FUNCTIONS:
  *	subImage
  */
 #include <stdio.h>
 #include <stdlib.h>
-#include "pgmSubImage.h"
+#include "gtopoSubImage.h"
 
 //take in an array of image data and output the image data between the values specified by the parameters
 short** subImage(short** file, int startCol, int endCol, int startRow, int endRow, int width){

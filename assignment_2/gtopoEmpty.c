@@ -1,11 +1,11 @@
-/*FILENAME: pgmEmpty.c
+/*FILENAME: gtopoEmpty.c
  *FUNCTIONS:
  *	createEmpty
  */
 
 #include <stdio.h>
 #include <stdlib.h>
-#include "pgmEmpty.h"
+#include "gtopoEmpty.h"
 
 //create an array to be used for image data of length width*height
 short** createEmpty(int width, int height){
