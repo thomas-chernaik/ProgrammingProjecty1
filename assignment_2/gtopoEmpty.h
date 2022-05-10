@@ -1,1 +1,1 @@
-short* createEmpty(int width, int height);
+short** createEmpty(int width, int height);

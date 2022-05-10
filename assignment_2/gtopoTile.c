@@ -1,18 +1,25 @@
-/*FILNAME: gtopoTile.c
- *FUNCTIONS:
+/*FILENAME: pgmTile.c
+ *FUNCTONS:
  *	insertRowAndColToString
  *DESCRIPTION:
- *	take an input file, an integer factor n and an output 
- *	file name template and divide the input file into
- *	nxn smaller images corresponding to parts of the image.
+ *	take 3 arguments, an input
+ *	file (either ASCII or binary),
+ *	an integer factor n, 
+ *	and an output file name template. 
+ *	It should divide the input file 
+ *	into nxn smaller images corresponding 
+ *	to parts of the image
  */
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "gtopoRead.h"
-#include "gtopoWrite.h"
-#include "gtopoSubImage.h"
+#include "pgmHeaders.h"
+#include "pgmRead.h"
+#include "pgmWrite.h"
+#include "pgmReadBinary.h"
+#include "pgmBinWrite.h"
+#include "pgmSubImage.h"
+
 //make the filename to write the tile to 
 //from the format string, the row and the column.
 char* insertRowAndColToString(char* formatString, int rowint, int colint){
@@ -33,7 +40,7 @@ char* insertRowAndColToString(char* formatString, int rowint, int colint){
 	strcat(outString, row);
 	strcat(outString, "_");
 	strcat(outString, col);
-	strcat(outString, ".dem");
+	strcat(outString, ".pgm");
 	free(row);
 	free(col);
 	return outString;
@@ -42,53 +49,78 @@ char* insertRowAndColToString(char* formatString, int rowint, int colint){
 int main(int argc, char **argv){
 	//validate argument count
 	if(argc == 1){
-		printf("Usage: ./gtopoTile inputFile width height tiling_factor outputFile_<row>_<column>\n");
+		printf("Usage: ./pgmTile inputImage.pgm tiling_factor outputImage_<row>_<column>.pgm\n");
 		return 0;
 	}
-	if(argc != 6){
+	if(argc != 4){
 		printf("ERROR: Bad Argument Count\n");
 		return 1;
 	}
-	int width = atoi(argv[2]);
-	int height = atoi(argv[3]);
-	char rowcolcmp[] = {'_', '<', 'r', 'o', 'w', '>'};
-        char* row_col = strstr(argv[5], rowcolcmp);
+	//create a variable with our format string in
+	char rowcolcmp[] = {'_', '<', 'r', 'o', 'w', '>', '_', '<','c','o','l','\0'};
+	//find where this string is in our template
+        char* row_col = strstr(argv[3], rowcolcmp);
+	//check it existed 
+	if(row_col == NULL)
+		{
+		//print error
+		printf("ERROR: Miscellaneous (bad template)\n");
+		return 100;
+		}
         *row_col = '\0';
-	short* file;
-	
-	file = readFile(argv[1], width, height);
-	//get subImages
-	int n = atoi(argv[4]);
-	for(int i=0; i<n; i++){
-		for (int j=0; j<n; j++){
+	//open the file
+	FILE* file = openFile(argv[1]);
+	int* headers;
+	//headers[0] is width, [1] is height, [2] is maxGrey [3] is magic num
+	headers = getHeaders(argv[1], file);
+	//check if binary or asci
+	short** imageData;
+	if (headers[3] == 2){	
+		//if ascii read the ascii file.
+		imageData = readFile(file, argv[1], headers[0], headers[1]);
+	}
+	else{
+		//else its binary so read the binary file
+		imageData = readFileBin(file, argv[1], headers[0], headers[1]);
+	}
+	//now we need to get the subImages from the file.
+	int n = atoi(argv[2]);
+	for(int i=0; i < n; i++){
+		for(int j=0; j < n; j++){
 			//get fileName for this tile
-			char* fileOut = insertRowAndColToString(argv[5], i, j);
-			//calculate the start and end row/col for this tile
+			char* fileOut = insertRowAndColToString(argv[3], i, j);
+			//calculate the start and end row and col for this tile
 			int startRow, endRow, startCol, endCol;
-			startRow = i*height/n;
+			startRow = i*headers[1]/n;
 			if(i == n-1){
-				endRow = height;
+				endRow = headers[1];
 			}
 			else{
-				endRow = startRow + height/n;
+				endRow = startRow + headers[1]/n;
 			}
-			startCol = j*width/n;
+			startCol = j*headers[0]/n;
 			if(j == n-1){
-				endCol = width;
+				endCol = headers[0];
 			}
 			else{
-				endCol = startCol + width/n;
+				endCol = startCol + headers[0]/n;
 			}
 			//get the tile data
-			short* outImage = subImage(file, startCol, endCol, startRow, endRow, width);
-			//write the tile data to file
-			writeFile(fileOut, outImage, endCol - startCol, endRow - startRow);
+			short** outImage = subImage(imageData, startCol, endCol, startRow, endRow, headers[0]);
+			//write the tile data to the file
+			if (headers[3] == 2){
+				writeFile(fileOut, outImage, endCol - startCol, endRow - startRow, headers[2]);
+			}
+			else{
+				writeBin(fileOut, outImage, endCol - startCol, endRow - startRow,  headers[2]);
+			}
 			free(fileOut);
 			free(outImage);
 		}
 	}
-	free(file);
+	free(headers);
+	free(imageData[0]);
+	free(imageData);
 	printf("TILED\n");
 	return 0;
 }
-

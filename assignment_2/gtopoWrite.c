@@ -1,28 +1,60 @@
-/*FILNAME: gtopoWrite.c
- * DESCRIPTION:
- * 	take an array of unsigned shorts and write them to a dem file
+/*FILENAME: pgmWrite.c
+ *DESCRIPTION:
+ *	take an array of shorts, header values, and a filename and write
+ *	a pgmFile with the provided data to the file "filename"
  */
 
 #include <stdio.h>
 #include <stdlib.h>
-#include "gtopoWrite.h"
+#include <string.h>
 
-void writeFile(char* filename, short* fileToWrite, int width, int height){
+void writeFile(char* filename, short** fileToWrite, int width, int height, int maxGrey){
 	//open the file to write
 	FILE *file;
-	file = fopen(filename, "wb+");
-	//check file opened successfully
+	file = fopen(filename, "w+");
+	//check the file opened correctly
 	if(!file){
 		printf("ERROR: Output Failed (%s)\n", filename);
 		exit(9);
 	}
-	unsigned char bytes[2];
-	//go through each int one by one and write it
-	for(int i=0; i<width*height; i++){
-		//we need to make sure we write the values in big endian
-		bytes[0] = (unsigned char) (fileToWrite[i] >> 8);
-		bytes[1] = (unsigned char) fileToWrite[i] & 255;
-		fwrite(&bytes[0], sizeof(unsigned char), 1, file);
-		fwrite(&bytes[1], sizeof(unsigned char), 1, file);
+	//read headers into a string and then write string to file
+	char* headers = malloc(sizeof(char)*9);
+	if(!headers){
+		printf("ERROR: Miscellaneous (malloc failed)\n");
+		exit(100);
 	}
+	//put the headers into a string for easy writing to a file then
+	//write them to the file
+	sprintf(headers, "P2\n%d %d\n%d\n", width, height, maxGrey);
+	fputs(headers, file);
+	free(headers);
+	char* stringToPut = malloc(sizeof(char) * 5);
+	if(!stringToPut){
+                printf("ERROR: Miscellaneous (malloc failed)\n");
+                exit(100);
+	}
+	int numToPut;
+	int lineLength = 0;
+	//go through the data and write it all to the file
+	for(int i=0; i<height; i++){
+		for(int j=0; j<width; j++){
+			//we need to do the +0.5f and round down to avoid any shorting point errors because we don't want those
+			numToPut = (int) fileToWrite[i][j];
+			sprintf(stringToPut, "%d", numToPut);
+			fputs(stringToPut, file);
+			lineLength += strlen(stringToPut);
+			//put some whitespace in
+			if(lineLength < 67){//going with 67 as my line limit because why not
+				fputc(' ', file);
+				lineLength ++;
+			}
+			else{
+				lineLength = 0;
+				fputc('\n', file);
+			}
+		}
+	}
+	fclose(file);
+	free(stringToPut);
+	//free(fileToWrite[0]);
 }
