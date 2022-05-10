@@ -37,7 +37,7 @@ char* insertRowAndColToString(char* formatString, int rowint, int colint){
 	strcat(outString, row);
 	strcat(outString, "_");
 	strcat(outString, col);
-	strcat(outString, ".gtopo");
+	strcat(outString, ".dem");
 	free(row);
 	free(col);
 	return outString;

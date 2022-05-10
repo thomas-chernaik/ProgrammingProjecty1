@@ -13,7 +13,7 @@
 int main(int argc, char** argv){
 	//validate the number of arguments
 	if(argc == 1){
-		printf("Usage: ./gtopoReduce input width height reduction_factor output");
+		printf("Usage: ./gtopoReduce input width height reduction_factor output\n");
 		return 0;
 	}
 	if(argc != 4){
