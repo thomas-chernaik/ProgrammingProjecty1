@@ -47,7 +47,7 @@ gtopoReduceSize.o: gtopoReduceSize.c gtopoReduceSize.h
 gtopoSubImage.o: gtopoSubImage.c gtopoSubImage.h
 	$(CC) $(CFLAGS) -c gtopoSubImage.c gtopoSubImage.h
 gtopoPrint.o: gtopoPrint.c gtopoPrint.h
-	$(CC) $(CFLAGS) -c gtpoPrint.c gtopoPrint.h
+	$(CC) $(CFLAGS) -c gtopoPrint.c gtopoPrint.h
 
 clean:
 	rm -f *.o *.gch gtopoEcho gtopoComp gtopoReduce gtopoTile
