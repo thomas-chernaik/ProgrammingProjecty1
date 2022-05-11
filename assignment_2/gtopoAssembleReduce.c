@@ -38,7 +38,7 @@ int main(int argc, char** argv)
 	//reduce the image
 	short** reducedData = reduceSize(assembledImageData, width, height, reductionFactor);
 	//write out the reduced file
-	writeFile(filename, reducedData, 1+(width/reductionFactor), 1+height/reductionFactor);
+	writeFile(filename, reducedData, (width/reductionFactor), height/reductionFactor);
 	free(assembledImageData[0]);
 	free(assembledImageData);
 	for(int i=0; i<1+(height/reductionFactor); i++)

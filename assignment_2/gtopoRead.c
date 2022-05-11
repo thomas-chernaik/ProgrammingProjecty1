@@ -117,6 +117,7 @@ short readInt(FILE* file, char* filename){
                 exit(8);
 	}
 	short returnNum = (chr1[0] << 8) |  chr1[1];
+	free(chr1);
 	return returnNum;
 }
 
