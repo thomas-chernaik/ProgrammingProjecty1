@@ -8,7 +8,7 @@ SRCREDUCE = gtopoRead.c gtopoWrite.c gtopoReduceSize.c
 SRCTILE = gtopoRead.c gtopoWrite.c gtopoSubImage.c
 SRCASSEMBLE = gtopoWrite.c gtopoInsert.c gtopoEmpty.c gtopoRead.c
 SRCPRINTLAND = gtopoRead.c gtopoPrint.c
-SRCASSEMBLEREDUCE = gtopoRead.c gtopoWrite.c 
+SRCASSEMBLEREDUCE = gtopoRead.c gtopoWrite.c gtopoReduceSize.c gtopoInsert.c gtopoEmpty.c 
 
 OBJECHO = $(SRCECHO:.c=.o)
 OBJCOMP = $(SRCCOMP:.c=.o)
@@ -16,9 +16,10 @@ OBJREDUCE = $(SRCREDUCE:.c=.o)
 OBJTILE = $(SRCTILE:.c=.o)
 OBJASSEMBLE = $(SRCASSEMBLE:.c=.o)
 OBJPRINTLAND = $(SRCPRINTLAND:.c=.o)
+OBJASSEMBLEREDUCE = $(SRCASSEMBLEREDUCE:.c=.o)
 
 
-all: gtopoEcho gtopoComp gtopoReduce gtopoTile gtopoPrintLand gtopoAssemble
+all: gtopoEcho gtopoComp gtopoReduce gtopoTile gtopoPrintLand gtopoAssemble gtopoAssembleReduce
 
 gtopoEcho: gtopoEcho.c $(OBJECHO)
 	$(CC) $(CFLAGS) gtopoEcho.c $(OBJECHO) -o gtopoEcho
@@ -32,6 +33,8 @@ gtopoAssemble: gtopoAssemble.c $(OBJASSEMBLE)
 	$(CC) $(CFLAGS) gtopoAssemble.c $(OBJASSEMBLE) -o gtopoAssemble
 gtopoPrintLand: gtopoPrintLand.c $(OBJPRINTLAND)
 	$(CC) $(CFLAGS) gtopoPrintLand.c $(OBJPRINTLAND) -o gtopoPrintLand
+gtopoAssembleReduce: gtopoAssembleReduce.c $(OBJASSEMBLEREDUCE)
+	$(CC) $(CFLAGS) gtopoAssembleReduce.c $(OBJASSEMBLEREDUCE) -o gtopoAssembleReduce
 
 
 gtopoRead.o: gtopoRead.c gtopoRead.h
@@ -59,4 +62,4 @@ gtopoPrint.o: gtopoPrint.c gtopoPrint.h
 	$(CC) $(CFLAGS) -c gtopoPrint.c gtopoPrint.h
 
 clean:
-	rm -f *.o *.gch gtopoEcho gtopoComp gtopoReduce gtopoTile
+	rm -f *.o *.gch gtopoEcho gtopoComp gtopoReduce gtopoTile gtopoPrintLand gtopoAssemble gtopoAssembleReduce

@@ -13,12 +13,12 @@ int main(int argc, char** argv)
 	{
 	//validate the number of arguments
 	if(argc == 1)
-`		{
+		{
 		//this is wrong in the document so I have written my own.
                 printf("Usage: ./gtopoAssembleReduce outputArray.gtopo width height reduction_factor (row column inputArray.gtopo width height)+\n");
                 return 0;
         	}
-	if((argc - 4) % 5 != 0)
+	if((argc - 5) % 5 != 0)
 		{
 		printf("ERROR: Bad Argument Count\n");
                 return 1;
@@ -30,7 +30,7 @@ int main(int argc, char** argv)
 	int height = atoi(argv[3]);
 	char* filename = argv[1];
 	//this is the number of arguments before the tiles are given
-	int offset = 4;
+	int offset = 5;
 	//assemble the image
 	short** assembledImageData = assemble(width, height, argv, argc, offset);
 	//get the reduction factor
@@ -38,14 +38,14 @@ int main(int argc, char** argv)
 	//reduce the image
 	short** reducedData = reduceSize(assembledImageData, width, height, reductionFactor);
 	//write out the reduced file
-	writeFile(filenam, reducedData, 1+(width/factor), 1+height/factor);
+	writeFile(filename, reducedData, 1+(width/reductionFactor), 1+height/reductionFactor);
 	free(assembledImageData[0]);
 	free(assembledImageData);
-	for(int i=0; i<1+(height/factor); i++)
+	for(int i=0; i<1+(height/reductionFactor); i++)
 		{
-		free(reducedFile[i]);
-		{
-	free(reducedFile);
+		free(reducedData[i]);
+		}	
+	free(reducedData);
 	printf("ASSEMBLED AND REDUCED\n");
 	return 0;
 	}

@@ -57,7 +57,7 @@ int main(int argc, char **argv){
 		return 1;
 	}
 	//create a variable with our format string in
-	char rowcolcmp[] = {'_', '<', 'r', 'o', 'w', '>', '_', '<','c','o','l','>','\0'};
+	char rowcolcmp[] = {'_', '<', 'r', 'o', 'w', '>', '_', '<','c','o','l','\0'};
 	//find where this string is in our template
         char* row_col = strstr(argv[3], rowcolcmp);
 	//check it existed 

@@ -43,10 +43,10 @@ int main(int argc, char** argv){
 	//downsize image data and store it in reduced file
 	reducedFile = reduceSize(imageData, width, height, factor);
 	//write out the reduced file
-	writeFile(argv[5], reducedFile, 1+(width/factor), 1+(height/factor));
+	writeFile(argv[5], reducedFile, (width/factor), (height/factor));
 	free(imageData[0]);
 	free(imageData);
-	for(int i=0; i< 1+(height/factor); i++){
+	for(int i=0; i< (height/factor); i++){
 		free(reducedFile[i]);
 	}
 	free(reducedFile);

@@ -23,7 +23,7 @@ int main(int argc, char **argv){
 		printf("Usage: ./gtopoAssemble outputFile width height (row column inputFile width height)+\n");
 		return 0;
 	}
-	if((argc-3) % 5 != 0){
+	if((argc-4) % 5 != 0){
 		printf("ERROR: Bad Argument Count\n");
 		return 1;
 	}
@@ -33,7 +33,7 @@ int main(int argc, char **argv){
 	int height = atoi(argv[3]);
 	//set a pointer to the filename with a readable name
 	char* filename = argv[1];
-	short** imageData = assemble(width, height, argv, argc, 3);
+	short** imageData = assemble(width, height, argv, argc, 4);
 	//write out the big file
 	writeFile(filename, imageData, width, height);
 	//free the image data row by row

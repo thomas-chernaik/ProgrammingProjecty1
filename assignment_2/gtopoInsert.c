@@ -23,23 +23,22 @@ short** assemble(int width, int height, char** argv, int argc, int offset)
         //create the image to paste the other images onto
         short** imageData = createEmpty(width, height);
         //now we have to loop through all the different images to put on it
-        for(int i=offset; i < (argc - offset)/5; i++)
+        for(int i=0; i < (argc - offset)/5; i++)
                 {
                 //get the row number and header number from the argv
-                int row = atoi(argv[i*5+1]);
-                int col = atoi(argv[i*5+2]);
+                int row = atoi(argv[i*5 + offset]);
+                int col = atoi(argv[i*5+1 + offset]);
                 //get the format string from the argv
-                char* fileNamei = argv[i*5+3];
-                int imWidth = atoi(argv[i*5+4]);
-                int imHeight = atoi(argv[i*5+5]);
+                char* fileNamei = argv[i*5+2 + offset];
+                int imWidth = atoi(argv[i*5+3 + offset]);
+                int imHeight = atoi(argv[i*5+4 + offset]);
                 short** fileToInsert;
                 fileToInsert = readFile(fileNamei, imWidth, imHeight);
                 //add the file data to the big file in the right place
-                insert(fileToInsert, imageData, row, col, width, height, width, height);
+                insert(fileToInsert, imageData, row, col, width, height, imWidth, imHeight);
                 //free memory
                 free(fileToInsert[0]);
                 free(fileToInsert);
-                free(fileNamei);
                 }
         return imageData;
         }
