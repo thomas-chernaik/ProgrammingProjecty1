@@ -45,25 +45,19 @@ int main(int argc, char **argv){
 		int col = atoi(argv[i*5+2]);
 		//get the format string from the argv
 		char* fileNamei = argv[i*5+3];
-		int imWidth = argv[i*5+4];
-		int imHeight = argv[i*5+5];
-		//open the file
+		int imWidth = atoi(argv[i*5+4]);
+		int imHeight = atoi(argv[i*5+5]);
 		short** fileToInsert;
-		//open the file
-		FILE* file = openFile(fileNamei);
-		//read the file in
-		//if ascii read as ascii
-		fileToInsert = readFile(file, fileNamei, imWidth, imHeight);
+		fileToInsert = readFile(fileNamei, imWidth, imHeight);
 		//add the file data to the big file in the right place
-		insert(fileToInsert, imageData, row, col, width, height, headers[0], headers[1]);
+		insert(fileToInsert, imageData, row, col, width, height, width, height);
 		//free memory
-		free(headers);
 		free(fileToInsert[0]);
 		free(fileToInsert);
 		free(fileNamei);
 	}
 	//write out the big file
-	writeFile(filename, imageData, width, height, maxGrey);
+	writeFile(filename, imageData, width, height);
 	//free the image data row by row
 	for(int i=0; i<height; i++)
 		{

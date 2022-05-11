@@ -6,19 +6,21 @@ SRCECHO = gtopoRead.c gtopoWrite.c
 SRCCOMP = gtopoRead.c gtopoCompare.c
 SRCREDUCE = gtopoRead.c gtopoWrite.c gtopoReduceSize.c
 SRCTILE = gtopoRead.c gtopoWrite.c gtopoSubImage.c
+SRCASSEMBLE = gtopoRead.c gtopoWrite.c gtopoEmpty.c gtopoInsert.c
 SRCPRINTLAND = gtopoRead.c gtopoPrint.c
 
 OBJECHO = $(SRCECHO:.c=.o)
 OBJCOMP = $(SRCCOMP:.c=.o)
 OBJREDUCE = $(SRCREDUCE:.c=.o)
 OBJTILE = $(SRCTILE:.c=.o)
+OBJASSEMBLE = $(SRCASSEMBLE:.c=.o)
 OBJPRINTLAND = $(SRCPRINTLAND:.c=.o)
 
 #idk what this bit does i need to try deleting it and seeing if it breaks the makefile
 .c.o:
 	$(CC) $(CFLAGS) -c -o $A@ $<
 
-all: gtopoEcho gtopoComp gtopoReduce gtopoTile gtopoPrintLand
+all: gtopoEcho gtopoComp gtopoReduce gtopoTile gtopoPrintLand gtopoAssemble
 
 gtopoEcho: gtopoEcho.c $(OBJECHO)
 	$(CC) $(CFLAGS) gtopoEcho.c $(OBJECHO) -o gtopoEcho
@@ -28,6 +30,8 @@ gtopoReduce: gtopoReduce.c $(OBJREDUCE)
 	$(CC) $(CFLAGS) gtopoReduce.c $(OBJREDUCE) -o gtopoReduce
 gtopoTile: gtopoTile.c $(OBJTILE)
 	$(CC) $(CFLAGS) gtopoTile.c $(OBJTILE) -o gtopoTile
+gtopoAssemble: gtopoAssemble.c $(OBJASSEMBLE)
+	$(CC) $(CFLAGS) gtopoAssemble.c $(OBJASSEMBLE) -o gtopoAssemble
 gtopoPrintLand: gtopoPrintLand.c $(OBJPRINTLAND)
 	$(CC) $(CFLAGS) gtopoPrintLand.c $(OBJPRINTLAND) -o gtopoPrintLand
 
@@ -46,6 +50,13 @@ gtopoReduceSize.o: gtopoReduceSize.c gtopoReduceSize.h
 
 gtopoSubImage.o: gtopoSubImage.c gtopoSubImage.h
 	$(CC) $(CFLAGS) -c gtopoSubImage.c gtopoSubImage.h
+
+gtopoEmpty.o: gtopoEmpty.c gtopoEmpty.h
+	$(CC) $(CFLAGS) -c gtopoEmpty.c gtopoEmpty.h
+
+gtopoInsert.o: gtopoInsert.c gtopoInsert.h
+	$(CC) $(CFLAGS) -c gtopoInsert.c gtopoInsert.h
+
 gtopoPrint.o: gtopoPrint.c gtopoPrint.h
 	$(CC) $(CFLAGS) -c gtopoPrint.c gtopoPrint.h
 
