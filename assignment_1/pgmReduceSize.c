@@ -8,8 +8,8 @@
 //downize the image data in file by factor factor
 unsigned char** reduceSize(unsigned char** file, int oldwidth, int oldheight, int factor){
 	//work out the new width and length
-	int width = (oldwidth / factor);
-	int height = (oldheight / factor);
+	int width = (oldwidth / factor) + (oldwidth % factor != 0);
+	int height = (oldheight / factor) + (oldheight % factor != 0);
 	//initialise the new width
 	unsigned char** newFile = (unsigned char**) malloc(sizeof(unsigned char*) * height);
 	for(int i=0; i<height; i++){

@@ -57,10 +57,10 @@ int main(int argc, char** argv){
 	//write out the reduced file
 	//check if ascii
 	if(headers[3] == 2){
-		writeFile(argv[3], reducedFile, (headers[0]/factor), (headers[1]/factor), headers[2]);
+		writeFile(argv[3], reducedFile, (headers[0]/factor) + (headers[0] % factor != 0), (headers[1]/factor) + (headers[1] % factor != 0), headers[2]);
 	}
 	else{
-		writeBin(argv[3], reducedFile, (headers[0]/factor), (headers[1]/factor), headers[2]);
+		writeBin(argv[3], reducedFile, (headers[0]/factor) + (headers[0] % factor != 0), (headers[1]/factor) + (headers[1] % factor != 0), headers[2]);
 	}
 	free(imageData[0]);
 	free(imageData);
