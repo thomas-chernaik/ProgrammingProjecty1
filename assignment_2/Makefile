@@ -8,6 +8,7 @@ SRCREDUCE = gtopoRead.c gtopoWrite.c gtopoReduceSize.c
 SRCTILE = gtopoRead.c gtopoWrite.c gtopoSubImage.c
 SRCASSEMBLE = gtopoWrite.c gtopoInsert.c gtopoEmpty.c gtopoRead.c
 SRCPRINTLAND = gtopoRead.c gtopoPrint.c
+SRCASSEMBLEREDUCE = gtopoRead.c gtopoWrite.c 
 
 OBJECHO = $(SRCECHO:.c=.o)
 OBJCOMP = $(SRCCOMP:.c=.o)
@@ -16,9 +17,6 @@ OBJTILE = $(SRCTILE:.c=.o)
 OBJASSEMBLE = $(SRCASSEMBLE:.c=.o)
 OBJPRINTLAND = $(SRCPRINTLAND:.c=.o)
 
-#idk what this bit does i need to try deleting it and seeing if it breaks the makefile
-.c.o:
-	$(CC) $(CFLAGS) -c -o $A@ $<
 
 all: gtopoEcho gtopoComp gtopoReduce gtopoTile gtopoPrintLand gtopoAssemble
 

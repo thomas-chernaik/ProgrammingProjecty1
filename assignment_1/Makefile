@@ -17,8 +17,6 @@ OBJREDUCE = $(SRCREDUCE:.c=.o)
 OBJECHO = $(SRCECHO:.c=.o)
 OBJCOMP = $(SRCCOMP:.c=.o)
 
-.c.o:
-	$(CC) $(CFLAGS) -c -o $@ $<
 
 all: pgmEcho pgmComp pgma2b pgmb2a pgmReduce pgmTile pgmAssemble
 
