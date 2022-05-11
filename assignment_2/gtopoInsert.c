@@ -18,7 +18,7 @@ void insert(short** imageToAdd, short** image, int row, int column, int width, i
 		}
 	}
 }
-short** assemble(char* filename, int width, int height, char** argv, int argc, int offset)
+short** assemble(int width, int height, char** argv, int argc, int offset)
         {
         //create the image to paste the other images onto
         short** imageData = createEmpty(width, height);

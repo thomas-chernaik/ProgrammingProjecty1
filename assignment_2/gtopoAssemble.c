@@ -33,7 +33,7 @@ int main(int argc, char **argv){
 	int height = atoi(argv[3]);
 	//set a pointer to the filename with a readable name
 	char* filename = argv[1];
-	short** imageData = assemble(filename, width, height, argv, argc, 3);
+	short** imageData = assemble(width, height, argv, argc, 3);
 	//write out the big file
 	writeFile(filename, imageData, width, height);
 	//free the image data row by row
