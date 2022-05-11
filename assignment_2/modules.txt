@@ -6,11 +6,14 @@ gtopoReduceSize - a module which will take an array and a factor and output an a
 gtopoSubImage - a module which will take an array and a start and end column and aend row and output that subImage for those rows and columns
 gtopoInsert - a module which will take an output image, an input image and a row and column in the output image to insert the input image.
 gtopoEmpty - a module which will take a width and length and output an array of width and length specified
+gtopoPrint - a module that will take an image array and output a formatted version of it
 
 all will use gtopoRead and gtopoWrite
 gtopoReduce wil use gtopoReduceSize
 gtopoTile will use gtopoSubImage
 gtopoAssemble will use gtopoInsert and gtopotEmpty
-
+gtopoInsert will use gtopoEmpty
+gtopoAssembleReduce will use all that gtopoAssemble and gtopoReduce uses
+gtopoPrintLand will use gtopoPrint
 All of these modules can be adapted from modules used in assignment_1
 
