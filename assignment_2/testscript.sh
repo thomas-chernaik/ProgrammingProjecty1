@@ -13,9 +13,9 @@ echo "testing gtopoComp"
 rm tmp.dem
 echo "testing gtopoTile"
 ./gtopoTile ./test/dems/gtopo30full_reduced_216.dem 200 100 10 "tmp_<row>_<column>.dem"
-for i in {1..9}
+for i in {0..9}
 do
-	for j in {1..9}
+	for j in {0..9}
 	do
 		diff ./test/dems/gtopo_reduced_$i\_$j.dem tmp_$i\_$j.dem
 		rm tmp_$i\_$j.dem
