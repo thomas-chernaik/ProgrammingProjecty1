@@ -69,7 +69,7 @@ int main(int argc, char **argv){
 			fileToInsert = readFileBin(file, fileNamei, headers[0], headers[1]);
 		}
 		//add the file data to the big file in the right place
-		insert(fileToInsert, imageData, row, col, width, height, headers[0], headers[1]);
+		insert(fileToInsert, imageData, row, col, width, height, headers[1], headers[0]);
 		//free memory
 		free(headers);
 		free(fileToInsert[0]);
