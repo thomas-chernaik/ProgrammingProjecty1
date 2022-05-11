@@ -35,7 +35,7 @@ short** assemble(int width, int height, char** argv, int argc, int offset)
                 short** fileToInsert;
                 fileToInsert = readFile(fileNamei, imWidth, imHeight);
                 //add the file data to the big file in the right place
-                insert(fileToInsert, imageData, row, col, width, height, imWidth, imHeight);
+                insert(fileToInsert, imageData, row, col, width, height, imHeight, imWidth);
                 //free memory
                 free(fileToInsert[0]);
                 free(fileToInsert);
