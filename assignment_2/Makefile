@@ -6,7 +6,7 @@ SRCECHO = gtopoRead.c gtopoWrite.c
 SRCCOMP = gtopoRead.c gtopoCompare.c
 SRCREDUCE = gtopoRead.c gtopoWrite.c gtopoReduceSize.c
 SRCTILE = gtopoRead.c gtopoWrite.c gtopoSubImage.c
-SRCASSEMBLE = gtopoRead.c gtopoWrite.c gtopoEmpty.c gtopoInsert.c
+SRCASSEMBLE = gtopoWrite.c gtopoInsert.c gtopoEmpty.c gtopoRead.c
 SRCPRINTLAND = gtopoRead.c gtopoPrint.c
 
 OBJECHO = $(SRCECHO:.c=.o)
@@ -54,8 +54,8 @@ gtopoSubImage.o: gtopoSubImage.c gtopoSubImage.h
 gtopoEmpty.o: gtopoEmpty.c gtopoEmpty.h
 	$(CC) $(CFLAGS) -c gtopoEmpty.c gtopoEmpty.h
 
-gtopoInsert.o: gtopoInsert.c gtopoInsert.h
-	$(CC) $(CFLAGS) -c gtopoInsert.c gtopoInsert.h
+gtopoInsert.o: gtopoInsert.c gtopoInsert.h 
+	$(CC) $(CFLAGS) -c gtopoInsert.c gtopoInsert.h 
 
 gtopoPrint.o: gtopoPrint.c gtopoPrint.h
 	$(CC) $(CFLAGS) -c gtopoPrint.c gtopoPrint.h

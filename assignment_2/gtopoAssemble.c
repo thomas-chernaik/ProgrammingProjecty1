@@ -13,10 +13,9 @@
  */ 
 #include <stdio.h>
 #include <stdlib.h>
-#include "gtopoRead.h"
 #include "gtopoWrite.h"
-#include "gtopoEmpty.h"
 #include "gtopoInsert.h"
+
 
 int main(int argc, char **argv){
 	//validate the number of arguments
@@ -32,30 +31,9 @@ int main(int argc, char **argv){
 	//convert the width and height to ints from strings
 	int width = atoi(argv[2]);
 	int height = atoi(argv[3]);
-	//set default values for maxGrey and type
-	int maxGrey = 255;
 	//set a pointer to the filename with a readable name
 	char* filename = argv[1];
-	//create the image to paste the other images onto
-	short** imageData = createEmpty(width, height);
-	//now we have to loop through all the different images to put on it
-	for(int i=3; i < (argc-3)/5; i++){
-		//get the row number and header number from the argv
-		int row = atoi(argv[i*5+1]);
-		int col = atoi(argv[i*5+2]);
-		//get the format string from the argv
-		char* fileNamei = argv[i*5+3];
-		int imWidth = atoi(argv[i*5+4]);
-		int imHeight = atoi(argv[i*5+5]);
-		short** fileToInsert;
-		fileToInsert = readFile(fileNamei, imWidth, imHeight);
-		//add the file data to the big file in the right place
-		insert(fileToInsert, imageData, row, col, width, height, width, height);
-		//free memory
-		free(fileToInsert[0]);
-		free(fileToInsert);
-		free(fileNamei);
-	}
+	short** imageData = assemble(filename, width, height, argv, argc, 3);
 	//write out the big file
 	writeFile(filename, imageData, width, height);
 	//free the image data row by row
